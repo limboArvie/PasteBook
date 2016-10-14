@@ -22,3 +22,13 @@ select,
 textarea {
     max-width: 280px;
 }
+
+#imgLogo{
+    padding-top: 10px;
+    padding-bottom: 10px;
+    height: 60px;
+}
+
+.navbar{
+    background-color: #023A50;
+}
