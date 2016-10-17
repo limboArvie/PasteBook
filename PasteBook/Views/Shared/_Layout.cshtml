@@ -17,16 +17,33 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a href='@Url.Action("Index", "PasteBook")'>
+                <a href='@Url.Action("Index", "PasteBookAccount")'>
                     <img id="imgLogo" src='@Url.Content("~/Content/Images/pastebookLogo.png")' />
                 </a>
             </div>
             <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav navbar-right">
-                    <li>@Html.ActionLink("Home", "Index", "PasteBook")</li>
-                    <li>@Html.ActionLink("Login", "Index", "PasteBook")</li>
-                    <li>@Html.ActionLink("Signup", "Index", "PasteBook")</li>
-                </ul>
+                @{
+                    if (Session["User"] != null)
+                    {
+                        <div class="nav navbar-nav navbar-right dropdown">
+                            <a href="" data-toggle="dropdown" class="dropdown-toggle">Hello, @Session["User"]<span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li>@Html.ActionLink("Profile","UserProfile", "PasteBookApp", new { userID = Session["User"]}, null)</li>
+                                <li><a href="#">Settings</a></li>
+                                <li><a href="@Url.Action("Logout", "PasteBookAccount")">Logout</a></li>
+                            </ul>
+                        </div>
+                    }
+
+                    else
+                    {
+                        <ul class="nav navbar-nav navbar-right">
+                            <li>@Html.ActionLink("Home", "Index", "PasteBookAccount")</li>
+                            <li>@Html.ActionLink("Login", "Login", "PasteBookAccount")</li>
+                            <li>@Html.ActionLink("Register", "Register", "PasteBookAccount")</li>
+                        </ul>
+                    }
+                }
             </div>
         </div>
     </div>

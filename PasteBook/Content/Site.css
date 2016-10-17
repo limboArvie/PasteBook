@@ -32,3 +32,30 @@ textarea {
 .navbar{
     background-color: #023A50;
 }
+
+#loginPanel, #registerPanel{
+    margin-top: 35px;
+    margin-bottom: 50px;
+}
+
+#loginPanel{
+    width: 530px;
+}
+
+#registerPanel{
+    width: 600px;
+}
+
+.panel-primary > .panel-heading{
+    background-color: #0079CF;
+    font-size: 25px;
+}
+
+.row{
+    padding: 8px;
+}
+
+#btnLogin{
+    width: 200px;
+    background-color: #0079CF;
+}

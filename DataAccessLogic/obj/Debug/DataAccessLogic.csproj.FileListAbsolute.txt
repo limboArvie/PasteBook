@@ -1,0 +1,12 @@
+C:\Users\Bootcamp\Source\Repos\PasteBook\DataAccessLogic\bin\Debug\DataAccessLogic.dll.config
+C:\Users\Bootcamp\Source\Repos\PasteBook\DataAccessLogic\bin\Debug\DataAccessLogic.dll
+C:\Users\Bootcamp\Source\Repos\PasteBook\DataAccessLogic\bin\Debug\DataAccessLogic.pdb
+C:\Users\Bootcamp\Source\Repos\PasteBook\DataAccessLogic\bin\Debug\EntityFramework.dll
+C:\Users\Bootcamp\Source\Repos\PasteBook\DataAccessLogic\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\Bootcamp\Source\Repos\PasteBook\DataAccessLogic\bin\Debug\PasteBookEntityFramework.dll
+C:\Users\Bootcamp\Source\Repos\PasteBook\DataAccessLogic\bin\Debug\PasteBookEntityFramework.pdb
+C:\Users\Bootcamp\Source\Repos\PasteBook\DataAccessLogic\bin\Debug\EntityFramework.xml
+C:\Users\Bootcamp\Source\Repos\PasteBook\DataAccessLogic\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\Bootcamp\Source\Repos\PasteBook\DataAccessLogic\obj\Debug\DataAccessLogic.csprojResolveAssemblyReference.cache
+C:\Users\Bootcamp\Source\Repos\PasteBook\DataAccessLogic\obj\Debug\DataAccessLogic.dll
+C:\Users\Bootcamp\Source\Repos\PasteBook\DataAccessLogic\obj\Debug\DataAccessLogic.pdb

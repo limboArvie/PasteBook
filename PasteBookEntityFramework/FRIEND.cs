@@ -21,7 +21,7 @@ namespace PasteBookEntityFramework
         public string BLOCKED { get; set; }
         public System.DateTime CREATED_DATE { get; set; }
     
-        public virtual USER USER { get; set; }
-        public virtual USER USER1 { get; set; }
+        public virtual FRIEND FRIEND1 { get; set; }
+        public virtual FRIEND FRIEND2 { get; set; }
     }
 }

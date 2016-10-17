@@ -49,18 +49,24 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="PasteBookDB.cs" />
+    <Compile Include="Manager\HashComputer.cs" />
+    <Compile Include="Manager\PasteBookDBManager.cs" />
+    <Compile Include="Manager\SaltGenerator.cs" />
+    <Compile Include="Manager\Utility.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Mapper\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\PasteBookEntityFramework\PasteBookEntityFramework.csproj">
       <Project>{0abd9231-222c-4155-a01a-6c908a840341}</Project>
       <Name>PasteBookEntityFramework</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="App.config" />
-    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

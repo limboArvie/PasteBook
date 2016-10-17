@@ -18,7 +18,6 @@ namespace PasteBookEntityFramework
         public USER()
         {
             this.COMMENTs = new HashSet<COMMENT>();
-            this.FRIENDs = new HashSet<FRIEND>();
             this.LIKEs = new HashSet<LIKE>();
             this.NOTIFICATIONs = new HashSet<NOTIFICATION>();
             this.NOTIFICATIONs1 = new HashSet<NOTIFICATION>();
@@ -43,9 +42,6 @@ namespace PasteBookEntityFramework
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<COMMENT> COMMENTs { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<FRIEND> FRIENDs { get; set; }
-        public virtual FRIEND FRIEND { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<LIKE> LIKEs { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

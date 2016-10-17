@@ -18,7 +18,7 @@ namespace PasteBookEntityFramework
         public int POST_ID { get; set; }
         public int LIKED_BY { get; set; }
     
-        public virtual POST POST { get; set; }
         public virtual USER USER { get; set; }
+        public virtual POST POST { get; set; }
     }
 }

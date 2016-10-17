@@ -14,9 +14,16 @@ namespace PasteBook
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
+                "PasteBookApp",
+                "PasteBook/{userID}",
+                new { controller = "PasteBookApp", action = "UserProfile" },
+                new { userID = @"\w+" }
+            );
+
+            routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "PasteBook", action = "Index", id = UrlParameter.Optional }
+                defaults: new { controller = "PasteBookAccount", action = "Index", id = UrlParameter.Optional }
             );
         }
     }
