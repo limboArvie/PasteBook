@@ -18,11 +18,13 @@
 
 /* Set width on the form input elements since they're 100% wide by default */
 input,
-select,
-textarea {
+select
+{
     max-width: 280px;
 }
 
+
+/**********************************************************************/
 #imgLogo{
     padding-top: 10px;
     padding-bottom: 10px;
@@ -51,11 +53,123 @@ textarea {
     font-size: 25px;
 }
 
-.row{
-    padding: 8px;
+#bodyRegister{
+    padding-left: 40px;
 }
 
-#btnLogin{
-    width: 200px;
+#bodyLogin{
+    padding-left: 30px;
+}
+
+.formField{
+    padding: 7px;
+}
+
+#btnLogin, #btnRegister, #btnAddFriend{
     background-color: #0079CF;
+}
+
+#btnLogin {
+    width: 200px;
+}
+
+#btnRegister {
+    width: 300px;
+}
+
+#btnAddFriend{
+    margin-left: 20px;
+    width: 300px;
+}
+
+#imgRegister{
+    height: 500px;
+    background-color: #0079CF;
+    margin-top: 35px;
+}
+
+#profileBanner{
+    width: 80%;
+    height: 244px;
+    margin-top: 35px;
+    background-color: #BBD9F0;
+}
+
+#imgProfile{
+    height: 180px;
+    width: 180px;
+    margin-left: 30px;
+}
+
+#txtfullName{
+    font-size: 50px;
+    padding-left: 50px;
+}
+
+#txtuserName{
+    font-size: large;
+    font-style: italic;
+    padding-left: 20px;
+}
+
+#txtEmail{
+    padding-left: 20px;
+    padding-bottom: 20px;
+    font-size: 30px;
+    color: #023A50;
+}
+
+
+#wellBasicInfo, #wellAboutMe{
+    width: 400px;
+}
+
+#wellBasicInfo{
+    background-color: #81CAD8;
+}
+
+#wellAboutMe{
+    background-color: #87B5DB;
+}
+
+#wellMenu{
+    width: 18%;
+    height: 244px;
+    margin-top: 35px;
+    background-color: #5B9DC1;
+    margin-left: 15px;
+}
+
+#wellPostArea{
+    background-color: #87B5DB;
+    width: 80%;
+    height: 220px;
+}
+
+#wellPostProfileArea{
+    background-color: #699CCE;
+    width: 700px;
+    height: 220px;
+    margin-left: 40px;
+}
+
+#txtAreaPost{
+    width: 100%;
+    height: 100px;
+    resize: none;
+}
+
+#wellPost{
+    background-color: #E6F3F6;
+    width: 80%;
+}
+
+#btnPost{
+    width: 150px;
+    margin-top: 10px;
+    background-color: #0079CF;
+}
+
+#txtPost{
+    font-weight: bolder;
 }

@@ -9,6 +9,8 @@ namespace PasteBook.Models
 {
     public class UserModel
     {
+        public int ID { get; set; }
+
         [Required]
         [DisplayName("Username")]
         public string USERNAME { get; set; }
@@ -43,6 +45,7 @@ namespace PasteBook.Models
 
         [Required]
         [DisplayName("Birthday")]
+        [DisplayFormat(DataFormatString = "{0:MMMM dd, yyyy}")]
         public DateTime BIRTHDAY { get; set; }
 
         [DisplayName("Country")]
@@ -52,5 +55,16 @@ namespace PasteBook.Models
         [DataType(DataType.PhoneNumber)]
         [Phone]
         public string MOBILE_NUMBER { get; set; }
+
+        public byte[] PROFILE_PIC { get; set; }
+
+        [DisplayName("Date Created")]
+        [DisplayFormat(DataFormatString = "{0:MMMM dd, yyyy}")]
+        public DateTime DATE_CREATED { get; set; }
+
+        [DisplayName("About Me")]
+        public string ABOUT_ME { get; set; }
     }
 }
+
+    

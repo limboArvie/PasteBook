@@ -10,7 +10,7 @@ namespace PasteBook.Controllers
 {
     public class PasteBookAccountController : Controller
     {
-        PasteBookManager manager = new PasteBookManager();
+        PasteBookAccountManager manager = new PasteBookAccountManager();
 
         public ActionResult Index()
         {
@@ -44,6 +44,7 @@ namespace PasteBook.Controllers
                 else
                 {
                     Session["User"] = currentUser.USERNAME;
+                    Session["Userid"] = currentUser.ID;
                     return RedirectToAction("Index", "PasteBookApp");
                 }
             }
@@ -91,6 +92,7 @@ namespace PasteBook.Controllers
         public ActionResult Logout()
         {
             Session["User"] = null;
+            Session["Userid"] = null;
             return View("Index");
         }
     }

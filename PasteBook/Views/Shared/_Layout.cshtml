@@ -17,15 +17,29 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a href='@Url.Action("Index", "PasteBookAccount")'>
-                    <img id="imgLogo" src='@Url.Content("~/Content/Images/pastebookLogo.png")' />
-                </a>
+                @{
+                    if (Session["User"] == null)
+                    {
+                        <a href='@Url.Action("Index", "PasteBookAccount")'>
+                            <img id="imgLogo" src='@Url.Content("~/Content/Images/pastebookLogo.png")' />
+                        </a>
+                    }
+
+                    else
+                    {
+                        <a href='@Url.Action("Index", "PasteBookApp")'>
+                            <img id="imgLogo" src='@Url.Content("~/Content/Images/pastebookLogo.png")' />
+                        </a>
+                    }
+                }
+                
             </div>
             <div class="navbar-collapse collapse">
                 @{
                     if (Session["User"] != null)
                     {
                         <div class="nav navbar-nav navbar-right dropdown">
+                            @Html.TextBox("Search")
                             <a href="" data-toggle="dropdown" class="dropdown-toggle">Hello, @Session["User"]<span class="caret"></span></a>
                             <ul class="dropdown-menu">
                                 <li>@Html.ActionLink("Profile","UserProfile", "PasteBookApp", new { userID = Session["User"]}, null)</li>

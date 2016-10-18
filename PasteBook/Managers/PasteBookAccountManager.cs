@@ -8,9 +8,8 @@ using System.Web;
 
 namespace PasteBook.Managers
 {
-    public class PasteBookManager
+    public class PasteBookAccountManager
     {
-
         PasteBookDBManager manager = new PasteBookDBManager();
         Mapper mapper = new Mapper();
 

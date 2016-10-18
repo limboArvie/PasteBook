@@ -1,1 +1,45 @@
-﻿<h1>News Feed</h1>
+﻿@model PasteBook.Models.PasteBookViewModel
+
+@{
+    if (Session["User"] == null)
+    {
+        Response.Redirect("~/PasteBookAccount/Login");
+    }
+
+    ViewBag.Title = "Home";
+}
+
+<h1>News Feed</h1>
+@using (Html.BeginForm("Index", "PasteBookApp", FormMethod.Post))
+{
+    <div id="wellPostArea" class="well well-lg">
+        <p id="txtPost"><span class="glyphicon glyphicon-pushpin"></span>Paste Something</p>
+        @Html.TextAreaFor(model => model.Post.Content, new { id = "txtAreaPost"})
+        <button id="btnPost" class="btn btn-primary btn-lg pull-right">Post</button>
+    </div>
+}
+
+@{
+    foreach (var item in Model.ListOfPost)
+    {
+        <div id="wellPost" class="well well-lg">
+            @Html.Label(item.POSTER_ID.ToString())
+            @Html.Label(item.PROFILE_OWNER_ID.ToString())
+            <p>@item.Content</p>
+            @Html.Label(item.CREATED_DATE.ToString("MMMM dd, yyyy"))
+
+            <button class="btnLike" value=@item.ID>Like</button>
+        </div>
+    }
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script>
+        var likeUrl = '@Url.Action("Like", "PasteBookApp")';
+    </script>
+    <script src="~/Scripts/likePost.js"></script>
+}
+        
+

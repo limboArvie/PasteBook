@@ -38,15 +38,49 @@ namespace PasteBook
         {
             return new UserModel()
             {
+                ID = user.ID,
                 USERNAME = user.USER_NAME,
-                PASSWORD = user.PASSWORD,
                 FIRST_NAME = user.FIRST_NAME,
                 LAST_NAME = user.LAST_NAME,
                 BIRTHDAY = user.BIRTHDAY,
                 COUNTRY = user.COUNTRY_ID,
                 MOBILE_NUMBER = user.MOBILE_NO,
                 GENDER = user.GENDER,
-                EMAIL_ADDRESS = user.EMAIL_ADDRESS
+                EMAIL_ADDRESS = user.EMAIL_ADDRESS,
+                PROFILE_PIC = user.PROFILE_PIC,
+                DATE_CREATED = user.DATE_CREATED,
+                ABOUT_ME = user.ABOUT_ME
+            };
+        }
+
+        public POST PostToDB(PostModel post)
+        {
+            return new POST()
+            {
+                CONTENT = post.Content,
+                PROFILE_OWNER_ID = post.PROFILE_OWNER_ID,
+                POSTER_ID = post.POSTER_ID
+            };
+        }
+
+        public PostModel PostToModel(POST post)
+        {
+            return new PostModel()
+            {
+                ID = post.ID,
+                CREATED_DATE = post.CREATED_DATE,
+                Content = post.CONTENT,
+                POSTER_ID = post.POSTER_ID,
+                PROFILE_OWNER_ID = post.PROFILE_OWNER_ID
+            };
+        }
+
+        public LIKE LikeToDB(LikeModel like)
+        {
+            return new LIKE()
+            {
+                POST_ID = like.POST_ID,
+                LIKED_BY = like.LIKED_BY
             };
         }
     }

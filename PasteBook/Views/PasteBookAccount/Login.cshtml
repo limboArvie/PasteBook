@@ -6,32 +6,32 @@
 
 @using (Html.BeginForm("Login", "PasteBookAccount", FormMethod.Post)) 
 {
-    <div id ="loginPanel" class="panel panel-primary col-lg-offset-3">
+    <div id ="loginPanel" class="panel panel-primary col-md-offset-3">
         <div class="panel-heading"><img src="~/Content/Images/pastebookIcon.ico">PasteBook Credentials</div>
-        <div class="panel-body">
-            <div class="row">
+        <div id="bodyLogin" class="panel-body">
+            <div class="row formField">
                 <div class="form-group">
-                    @Html.LabelFor(model => model.EMAIL_ADDRESS, htmlAttributes: new { @class = "control-label col-md-3" })
-                    <div class="col-md-9">
+                    @Html.LabelFor(model => model.EMAIL_ADDRESS, htmlAttributes: new { @class = "control-label col-md-4" })
+                    <div class="col-md-8">
                         @Html.EditorFor(model => model.EMAIL_ADDRESS, new { htmlAttributes = new { @class = "form-control" } })
                         @Html.ValidationMessageFor(model => model.EMAIL_ADDRESS, "", new { @class = "text-danger" })
                     </div>
                 </div>
             </div>
             
-            <div class="row">
+            <div class="row formField">
                 <div class="form-group">
-                    @Html.LabelFor(model => model.PASSWORD, htmlAttributes: new { @class = "control-label col-md-3" })
-                    <div class="col-md-9">
+                    @Html.LabelFor(model => model.PASSWORD, htmlAttributes: new { @class = "control-label col-md-4" })
+                    <div class="col-md-8">
                         @Html.EditorFor(model => model.PASSWORD, new { htmlAttributes = new { @class = "form-control" } })
                         @Html.ValidationMessageFor(model => model.PASSWORD, "", new { @class = "text-danger" })
                     </div>
                 </div>
             </div>
 
-            <div class="row">
+            <div class="row formField">
                 <div class="form-group">
-                    <div class="col-md-offset-4 col-md-4">
+                    <div class="col-md-offset-5 col-md-4">
                         <input id="btnLogin" type="submit" value="Login" class="btn btn-primary btn-lg" />
                     </div>
                 </div>

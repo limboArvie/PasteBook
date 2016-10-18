@@ -13,9 +13,18 @@ namespace DataAccessLogic
 
         public List<REF_COUNTRY> RetrieveCountryList()
         {
-            using (var context = new PASTEBOOKEntities())
+            try
             {
-                return context.REF_COUNTRY.ToList();
+                using (var context = new PASTEBOOKEntities())
+                {
+                    return context.REF_COUNTRY.ToList();
+                }
+            }
+
+            catch (Exception ex)
+            {
+                errorList.Add(ex);
+                return null;
             }
         }
         
@@ -131,6 +140,76 @@ namespace DataAccessLogic
             HashComputer m_hashComputer = new HashComputer();
             string finalString = password + salt;
             return hash == m_hashComputer.GetPasswordHashAndSalt(finalString);
+        }
+
+        public USER RetrieveSpecificUser(string username)
+        {
+            try
+            {
+                using (var context = new PASTEBOOKEntities())
+                {
+                    return context.USERs.Where(x => x.USER_NAME == username).SingleOrDefault();
+                }
+            }
+            catch (Exception ex)
+            {
+                errorList.Add(ex);
+                return null;
+            }
+        }
+
+        public bool Post(POST post)
+        {
+            try
+            {
+                using (var context = new PASTEBOOKEntities())
+                {
+                    post.CREATED_DATE = DateTime.Now;
+                    context.POSTs.Add(post);
+                    return context.SaveChanges() > 0;
+                }
+            }
+
+            catch (Exception ex)
+            {
+                errorList.Add(ex);
+                return false;
+            }
+        }
+
+        public List<POST> RetrieveTimeLinePosts()
+        {
+            try
+            {
+                using (var context = new PASTEBOOKEntities())
+                {
+                    return context.POSTs.OrderByDescending(x=>x.CREATED_DATE).ToList();
+                }
+            }
+
+            catch (Exception ex)
+            {
+                errorList.Add(ex);
+                return null;
+            }
+        }
+
+        public bool LikePost(LIKE like)
+        {
+            try
+            {
+                using (var context = new PASTEBOOKEntities())
+                {
+                    context.LIKEs.Add(like);
+                    return context.SaveChanges() > 0;
+                }
+            }
+
+            catch (Exception ex)
+            {
+                errorList.Add(ex);
+                return false;
+            }
         }
     }
 }
