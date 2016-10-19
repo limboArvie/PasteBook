@@ -10,36 +10,33 @@
 }
 
 <h1>News Feed</h1>
-@using (Html.BeginForm("Index", "PasteBookApp", FormMethod.Post))
-{
+@{
     <div id="wellPostArea" class="well well-lg">
         <p id="txtPost"><span class="glyphicon glyphicon-pushpin"></span>Paste Something</p>
-        @Html.TextAreaFor(model => model.Post.Content, new { id = "txtAreaPost"})
-        <button id="btnPost" class="btn btn-primary btn-lg pull-right">Post</button>
+        @Html.TextAreaFor(model => model.Post.Content, new { id = "txtAreaPostFeed"})
+        <button id="btnPostFeed" class="btn btn-primary btn-lg pull-right">Paste</button>
     </div>
 }
 
-@{
-    foreach (var item in Model.ListOfPost)
-    {
-        <div id="wellPost" class="well well-lg">
-            @Html.Label(item.POSTER_ID.ToString())
-            @Html.Label(item.PROFILE_OWNER_ID.ToString())
-            <p>@item.Content</p>
-            @Html.Label(item.CREATED_DATE.ToString("MMMM dd, yyyy"))
-
-            <button class="btnLike" value=@item.ID>Like</button>
-        </div>
+<div id="divFeedPost">
+    @{ 
+        Html.RenderAction("FeedPostPartialView", "PasteBookApp");
     }
-}
+</div>
+
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 
     <script>
+        var postUrl = '@Url.Action("Post", "PasteBookApp")';
+        var renderPostUrl = '@Url.Action("FeedPostPartialView", "PasteBookApp")';
+        var renderPostTLUrl = '@Url.Action("TimeLinePostPartialView", "PasteBookApp")';
         var likeUrl = '@Url.Action("Like", "PasteBookApp")';
+        var currentUserID = @Session["Userid"];
     </script>
-    <script src="~/Scripts/likePost.js"></script>
+
+    <script src="~/Scripts/pastebookPost.js"></script>
 }
         
 

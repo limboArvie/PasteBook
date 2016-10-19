@@ -75,10 +75,44 @@ namespace PasteBook
             };
         }
 
+        public FriendModel FriendToModel(FRIEND friend)
+        {
+            return new FriendModel()
+            {
+                ID = friend.ID,
+                USER_ID = friend.USER_ID,
+                FRIEND_ID = friend.FRIEND_ID,
+                REQUEST = friend.REQUEST,
+                BLOCKED = friend.BLOCKED,
+                CREATED_DATE = friend.CREATED_DATE
+            };
+        }
+
+        public FRIEND FriendToDB(FriendModel friend)
+        {
+            return new FRIEND()
+            {
+                USER_ID = friend.USER_ID,
+                FRIEND_ID = friend.FRIEND_ID,
+                REQUEST = friend.REQUEST,
+                BLOCKED = friend.BLOCKED
+            };
+        }
+
         public LIKE LikeToDB(LikeModel like)
         {
             return new LIKE()
             {
+                POST_ID = like.POST_ID,
+                LIKED_BY = like.LIKED_BY
+            };
+        }
+
+        public LikeModel LikeToModel(LIKE like)
+        {
+            return new LikeModel()
+            {
+                ID = like.ID,
                 POST_ID = like.POST_ID,
                 LIKED_BY = like.LIKED_BY
             };

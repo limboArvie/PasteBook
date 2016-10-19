@@ -31,7 +31,18 @@
                         @Html.DisplayFor(model => model.User.EMAIL_ADDRESS)
                     </div>
                     @{
-                        if ((string)Session["User"] != Model.User.USERNAME)
+                        if ((string)Session["User"] != Model.User.USERNAME && Model.ListOfFriend.Any(x => x.FRIEND_ID == (int)Session["CurrentProfile"] && x.REQUEST =="Y"))
+                        {
+                            <button id="btnFriends" class="btn btn-success col-md-3" disabled>Friends</button>
+                            
+                        }
+
+                        else if (Model.ListOfFriend.Any(x => x.FRIEND_ID == (int)Session["CurrentProfile"] && x.REQUEST == "N"))
+                        {
+                            <button id="btnFRequest" class="btn btn-warning col-md-3" disabled>Friend Request Sent</button>
+                        }
+
+                        else if(Model.ListOfFriend.Any(x => x.FRIEND_ID != (int)Session["CurrentProfile"]) && (string)Session["User"] != Model.User.USERNAME)
                         {
                             <button id="btnAddFriend" class="btn btn-primary col-md-3">Add Friend</button>
                         }
@@ -43,9 +54,9 @@
 
     <div id="wellMenu" class="well well-lg col-md-3">
         <button class="btn btn-primary">Notifications</button>
-        <button class="btn btn-primary">Friends</button>
+        <button class="btn btn-primary" onclick="location.href='@Url.Action("Friends", "PasteBookApp")'">Friends</button>
         <button class="btn btn-primary">Settings</button>
-        <button class="btn btn-primary" onclick="location.href='@Url.Action("Logout", "PasteBookApp")'">Logout</button>
+        <button class="btn btn-primary" onclick="location.href='@Url.Action("Logout", "PasteBookAccount")'">Logout</button>
     </div>
 </div>
 
@@ -90,52 +101,52 @@
         </div>
 
         <div id="wellAboutMe" class="well well-lg">
-        <div class="row">
-            <div class="col-md-4">
-                @Html.LabelFor(model => model.User.DATE_CREATED)
+            <div class="row">
+                <div class="col-md-4">
+                    @Html.LabelFor(model => model.User.DATE_CREATED)
+                </div>
+                <div class="col-md-8">
+                    @Html.DisplayFor(model => model.User.DATE_CREATED)
+                </div>
             </div>
-            <div class="col-md-8">
-                @Html.DisplayFor(model => model.User.DATE_CREATED)
-            </div>
-        </div>
 
-        <div class="row">
-            <div class="col-md-4">
-                @Html.LabelFor(model => model.User.ABOUT_ME)
-            </div>
-            <div class="col-md-8">
-                @Html.DisplayFor(model => model.User.ABOUT_ME)
+            <div class="row">
+                <div class="col-md-4">
+                    @Html.LabelFor(model => model.User.ABOUT_ME)
+                </div>
+                <div class="col-md-8">
+                    @Html.DisplayFor(model => model.User.ABOUT_ME)
+                </div>
             </div>
         </div>
-    </div>
     </div>
     <div class="col-md-6">
-        @using (Html.BeginForm("Post", "PasteBookApp", FormMethod.Post))
-        {
-            <div id="wellPostProfileArea" class="well well-lg">
-                <p id="txtPost"><span class="glyphicon glyphicon-pushpin"></span>Paste Something</p>
-                @Html.TextAreaFor(model => model.Post.Content, new { id = "txtAreaPost" })
-                <input type="submit" id="btnPost" class="btn btn-primary btn-lg pull-right" value="Post">
-            </div>
-        }
-        @{
-            @*foreach (var item in Model.ListOfPost)
-            {
-                <div id="wellPost" class="well well-lg">
-                    @Html.Label(item.POSTER_ID.ToString())
-                    @Html.Label(item.PROFILE_OWNER_ID.ToString())
-                    <p>@item.Content</p>
-                    @Html.Label(item.CREATED_DATE.ToString("MMMM dd, yyyy"))
+        <div id="wellPostProfileArea" class="well well-lg">
+            <p id="txtPost"><span class="glyphicon glyphicon-pushpin"></span>Paste Something</p>
+            @Html.TextAreaFor(model => model.Post.Content, new { id = "txtAreaPostTimeLine" })
+            <button id="btnPostTimeLine" class="btn btn-primary btn-lg pull-right">Paste</button>
+        </div>
 
-                    <button class="btnLike" value=@item.ID>Like</button>
-                </div>
-            }*@
-        }
-        
+        <div id="divTimeLinePost">
+            @{
+                Html.RenderAction("TimeLinePostPartialView", "PasteBookApp", new { user = Model});
+            }
+        </div>
     </div>
 </div>
 
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
 
+    <script>
+        var postTLUrl = '@Url.Action("Post", "PasteBookApp")';
+        var renderPostTLUrl = '@Url.Action("TimeLinePostPartialView", "PasteBookApp")';
+        var likeUrl = '@Url.Action("Like", "PasteBookApp")';
+        var addFriendUrl = '@Url.Action("AddFriend", "PasteBookApp")';
+        var currentUserID = @Session["Userid"];
+        var currentProfileID = @Session["CurrentProfile"];
+    </script>
 
-
-
+    <script src="~/Scripts/pastebookPost.js"></script>
+    <script src="~/Scripts/pastebookFriend.js"></script>
+}

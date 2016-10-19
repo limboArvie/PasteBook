@@ -153,18 +153,18 @@ select
     margin-left: 40px;
 }
 
-#txtAreaPost{
+#txtAreaPostFeed, #txtAreaPostTimeLine{
     width: 100%;
     height: 100px;
     resize: none;
 }
 
-#wellPost{
+#wellPostFeed{
     background-color: #E6F3F6;
     width: 80%;
 }
 
-#btnPost{
+#btnPostFeed, #btnPostTimeLine{
     width: 150px;
     margin-top: 10px;
     background-color: #0079CF;
@@ -172,4 +172,10 @@ select
 
 #txtPost{
     font-weight: bolder;
+}
+
+#wellPostTimeline{
+    background-color: #E6F3F6;
+    width: 700px;
+    margin-left: 40px;
 }

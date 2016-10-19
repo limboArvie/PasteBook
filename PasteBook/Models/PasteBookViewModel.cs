@@ -10,5 +10,6 @@ namespace PasteBook.Models
         public UserModel User { get; set; }
         public PostModel Post { get; set; }
         public List<PostModel> ListOfPost { get; set; }
+        public List<FriendModel> ListOfFriend { get; set; }
     }
 }

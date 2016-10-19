@@ -162,9 +162,10 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Managers\PasteBookAccountManager.cs" />
-    <Compile Include="Managers\PasteBookProfileManager.cs" />
+    <Compile Include="Managers\PasteBookAppManager.cs" />
     <Compile Include="Mapper\Mapper.cs" />
     <Compile Include="Models\FriendModel.cs" />
+    <Compile Include="Models\FriendsViewModel.cs" />
     <Compile Include="Models\LikeModel.cs" />
     <Compile Include="Models\PasteBookViewModel.cs" />
     <Compile Include="Models\PostModel.cs" />
@@ -197,8 +198,9 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
-    <Content Include="Scripts\likePost.js" />
+    <Content Include="Scripts\pastebookPost.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\pastebookFriend.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
@@ -218,6 +220,9 @@
     <Content Include="Views\PasteBookAccount\Login.cshtml" />
     <Content Include="Views\PasteBookApp\Index.cshtml" />
     <Content Include="Views\PasteBookApp\UserProfile.cshtml" />
+    <Content Include="Views\PasteBookApp\Friends.cshtml" />
+    <Content Include="Views\PasteBookApp\FeedPostPartialView.cshtml" />
+    <Content Include="Views\PasteBookApp\TimeLinePostPartialView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

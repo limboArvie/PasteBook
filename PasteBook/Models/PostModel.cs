@@ -15,5 +15,6 @@ namespace PasteBook.Models
         public string PROFILE_OWNER_NAME { get; set; }
         public int POSTER_ID { get; set; }
         public string POSTER_NAME { get; set; }
+        public bool LikeIndicator { get; set; }
     }
 }

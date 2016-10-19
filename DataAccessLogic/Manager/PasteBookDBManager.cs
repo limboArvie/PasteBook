@@ -158,6 +158,22 @@ namespace DataAccessLogic
             }
         }
 
+        public USER RetrieveSpecificUser(int userID)
+        {
+            try
+            {
+                using (var context = new PASTEBOOKEntities())
+                {
+                    return context.USERs.Where(x => x.ID == userID).SingleOrDefault();
+                }
+            }
+            catch (Exception ex)
+            {
+                errorList.Add(ex);
+                return null;
+            }
+        }
+
         public bool Post(POST post)
         {
             try
@@ -177,13 +193,30 @@ namespace DataAccessLogic
             }
         }
 
-        public List<POST> RetrieveTimeLinePosts()
+        public List<POST> RetrieveFeedPosts()
         {
             try
             {
                 using (var context = new PASTEBOOKEntities())
                 {
                     return context.POSTs.OrderByDescending(x=>x.CREATED_DATE).ToList();
+                }
+            }
+
+            catch (Exception ex)
+            {
+                errorList.Add(ex);
+                return null;
+            }
+        }
+
+        public List<POST> RetrieveTimeLinePosts(int id)
+        {
+            try
+            {
+                using (var context = new PASTEBOOKEntities())
+                {
+                    return context.POSTs.Where(x=>x.PROFILE_OWNER_ID == id).OrderByDescending(x => x.CREATED_DATE).ToList();
                 }
             }
 
@@ -209,6 +242,57 @@ namespace DataAccessLogic
             {
                 errorList.Add(ex);
                 return false;
+            }
+        }
+
+        public List<FRIEND> RetrieveFriends(int id)
+        {
+            try
+            {
+                using (var context = new PASTEBOOKEntities())
+                {
+                    return context.FRIENDs.Where(x => x.USER_ID == id || x.FRIEND_ID == id).ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                errorList.Add(ex);
+                return null;
+            }
+        }
+
+        public bool AddFriend(FRIEND friend)
+        {
+            try
+            {
+                using (var context = new PASTEBOOKEntities())
+                {
+                    friend.CREATED_DATE = DateTime.Now;
+                    context.FRIENDs.Add(friend);
+                    return context.SaveChanges() > 0;
+                }
+            }
+
+            catch (Exception ex)
+            {
+                errorList.Add(ex);
+                return false;
+            }
+        }
+
+        public List<LIKE> RetrieveLikes()
+        {
+            try
+            {
+                using (var context = new PASTEBOOKEntities())
+                {
+                    return context.LIKEs.ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                errorList.Add(ex);
+                return null;
             }
         }
     }

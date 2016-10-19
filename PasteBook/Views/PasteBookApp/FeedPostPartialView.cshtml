@@ -1,0 +1,42 @@
+﻿@model PasteBook.Models.PasteBookViewModel
+
+<div>
+    @{
+        foreach (var item in Model.ListOfPost)
+        {
+            <div id="wellPostFeed" class="well well-lg">
+                @{
+                    if (@item.POSTER_ID != @item.PROFILE_OWNER_ID)
+                    {
+                        <p>@item.POSTER_NAME --> @item.PROFILE_OWNER_NAME</p>
+                    }
+
+                    else
+                    {
+                        <p>@item.POSTER_NAME</p>
+                    }
+                }
+                <p>@item.Content</p>
+                @Html.Label(item.CREATED_DATE.ToString("MMMM dd, yyyy"))
+                <br />
+                @{
+                    if (item.LikeIndicator == true)
+                    {
+                        <button class="btn btn-success" value=@item.ID disabled>Liked</button>
+                    }
+
+                    else
+                    {
+                        <button class="btnLike" value=@item.ID>Like</button>
+                    }
+                }
+                
+                <br />
+                @Html.TextArea("CommentFeed", new { row = "2" })
+                <button>Comment</button>
+            </div>
+        }
+    }
+
+</div>
+
