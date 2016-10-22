@@ -1,7 +1,10 @@
 ﻿$(document).ready(function () {
     $('#btnAddFriend').on('click', function () {
         var data = {
-            "CurrentProfile": currentProfileID
+            "USER_ID": currentUserID,
+            "FRIEND_ID": currentProfileID,
+            "REQUEST": "N",
+            "BLOCKED":"N"
         }
 
         $.ajax({

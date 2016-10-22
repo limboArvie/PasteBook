@@ -2,7 +2,11 @@
 
     $('#btnPostFeed').on('click', function () {
         var data = {
-            "Content": $('#txtAreaPostFeed').val()
+            "CONTENT": $('#txtAreaPostFeed').val(),
+            "ID": 0,
+            "PROFILE_OWNER_ID": currentUserID,
+            "POSTER_ID": currentUserID,
+            "CREATED_DATE": null
         }
 
         if (data.Content == '') {
@@ -27,7 +31,11 @@
 
     $('#btnPostTimeLine').on('click', function () {
         var data = {
-            "Content": $('#txtAreaPostTimeLine').val()
+            "CONTENT": $('#txtAreaPostTimeLine').val(),
+            "ID": 0,
+            "PROFILE_OWNER_ID": currentUserID,
+            "POSTER_ID": currentUserID,
+            "CREATED_DATE": null
         }
 
         if (data.Content == '') {
@@ -50,7 +58,7 @@
         }
     });
 
-    $(document).delegate('.btnLike','click', function () {
+    $(document).on('click','.btnLike', function () {
 
         var data = {
             "ID": null,
@@ -72,6 +80,54 @@
         })
     });
 
+    $(document).on('click', '.btnComment', function () {
+
+        var data = {
+            "ID": null,
+            "POST_ID": this.value,
+            "POSTER_ID": currentUserID,
+            "CONTENT": $('#' + this.value).val(),
+            "DATE_CREATED": null
+        }
+
+        $.ajax({
+            url: commentUrl,
+            data: data,
+            type: 'POST',
+            success: function (data) {
+                CommentFSuccess(data);
+            },
+
+            error: function () {
+                alert('Something went wrong')
+            }
+        })
+    });
+
+    $(document).on('click', '.btnCommentTL', function () {
+
+        var data = {
+            "ID": null,
+            "POST_ID": this.value,
+            "POSTER_ID": currentUserID,
+            "CONTENT": $('#' + this.value).val(),
+            "DATE_CREATED": null
+        }
+
+        $.ajax({
+            url: commentTLUrl,
+            data: data,
+            type: 'POST',
+            success: function (data) {
+                CommentTLSuccess(data);
+            },
+
+            error: function () {
+                alert('Something went wrong')
+            }
+        })
+    });
+
 
     function AddPostFeedSuccess(data) {
         $('#txtAreaPostFeed').val('')
@@ -86,4 +142,13 @@
     function LikeSuccess(data) {
         $('#divFeedPost').load(renderPostUrl);
     }
+
+    function CommentFSuccess(data) {
+        $('#divFeedPost').load(renderPostUrl);
+    }
+
+    function CommentTLSuccess(data) {
+        $('#divTimeLinePost').load(renderPostTLUrl);
+    }
 });
+

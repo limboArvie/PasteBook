@@ -1,0 +1,14 @@
+C:\Users\Bootcamp\Source\Repos\PasteBook\PasteBookBusinessLogic\bin\Debug\PasteBookBusinessLogic.dll.config
+C:\Users\Bootcamp\Source\Repos\PasteBook\PasteBookBusinessLogic\bin\Debug\PasteBookBusinessLogic.dll
+C:\Users\Bootcamp\Source\Repos\PasteBook\PasteBookBusinessLogic\bin\Debug\PasteBookBusinessLogic.pdb
+C:\Users\Bootcamp\Source\Repos\PasteBook\PasteBookBusinessLogic\bin\Debug\EntityFramework.dll
+C:\Users\Bootcamp\Source\Repos\PasteBook\PasteBookBusinessLogic\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\Bootcamp\Source\Repos\PasteBook\PasteBookBusinessLogic\bin\Debug\PasteBookDataAccessLogic.dll
+C:\Users\Bootcamp\Source\Repos\PasteBook\PasteBookBusinessLogic\bin\Debug\PasteBookEntityFramework.dll
+C:\Users\Bootcamp\Source\Repos\PasteBook\PasteBookBusinessLogic\bin\Debug\PasteBookDataAccessLogic.pdb
+C:\Users\Bootcamp\Source\Repos\PasteBook\PasteBookBusinessLogic\bin\Debug\PasteBookEntityFramework.pdb
+C:\Users\Bootcamp\Source\Repos\PasteBook\PasteBookBusinessLogic\bin\Debug\EntityFramework.xml
+C:\Users\Bootcamp\Source\Repos\PasteBook\PasteBookBusinessLogic\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\Bootcamp\Source\Repos\PasteBook\PasteBookBusinessLogic\obj\Debug\PasteBookBusinessLogic.csprojResolveAssemblyReference.cache
+C:\Users\Bootcamp\Source\Repos\PasteBook\PasteBookBusinessLogic\obj\Debug\PasteBookBusinessLogic.dll
+C:\Users\Bootcamp\Source\Repos\PasteBook\PasteBookBusinessLogic\obj\Debug\PasteBookBusinessLogic.pdb

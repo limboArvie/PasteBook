@@ -51,7 +51,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
     <Compile Include="COMMENT.cs">
       <DependentUpon>PasteBookModel.tt</DependentUpon>
     </Compile>

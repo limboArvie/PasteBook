@@ -1,23 +1,16 @@
-﻿using PasteBook.Managers;
-using PasteBook.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using PasteBook.Models;
+using PasteBookBusinessLogic;
+using PasteBookEntityFramework;
 using System.Web.Mvc;
 
 namespace PasteBook.Controllers
 {
     public class PasteBookAccountController : Controller
     {
-        PasteBookAccountManager manager = new PasteBookAccountManager();
+        UserBLManager userManager = new UserBLManager();
 
         public ActionResult Index()
         {
-            if (Session["CountryList"] == null)
-            {
-                Session["CountryList"] = new SelectList (manager.RetrieveCountryList(), "ID", "COUNTRY");
-            }
             return View();
         }
 
@@ -27,13 +20,13 @@ namespace PasteBook.Controllers
         }
 
         [HttpPost]
-        public ActionResult Login(UserModel user)
+        public ActionResult Login(USER user)
         {
-            UserModel currentUser = new UserModel();
+            USER currentUser = new USER();
 
             if (user.EMAIL_ADDRESS!=null && user.PASSWORD!=null)
             {
-                currentUser = manager.LoginUser(user);
+                currentUser = userManager.LoginUser(user);
 
                 if (currentUser == null)
                 {
@@ -43,7 +36,7 @@ namespace PasteBook.Controllers
 
                 else
                 {
-                    Session["User"] = currentUser.USERNAME;
+                    Session["User"] = currentUser.USER_NAME;
                     Session["Userid"] = currentUser.ID;
                     return RedirectToAction("Index", "PasteBookApp");
                 }
@@ -58,35 +51,32 @@ namespace PasteBook.Controllers
 
         public ActionResult Register()
         {
-            if (Session["CountryList"] == null)
-            {
-                Session["CountryList"] = new SelectList(manager.RetrieveCountryList(), "ID", "COUNTRY");
-            }
-
+            ViewBag.Country = new SelectList(userManager.RetrieveCountryList(), "ID", "COUNTRY");
             return View();
         }
 
         [HttpPost]
-        public ActionResult Register(UserModel user)
+        public ActionResult Register(USER user)
         {
-            if (manager.CheckUsername(user.USERNAME))
+            ViewBag.Country = new SelectList(userManager.RetrieveCountryList(), "ID", "COUNTRY");
+
+            if (userManager.CheckUsername(user.USER_NAME))
             {
-                ModelState.AddModelError("USERNAME", "Username already exists.");
+                ModelState.AddModelError("USER_NAME", "Username already exists.");
             }
 
-            if (manager.CheckEmail(user.EMAIL_ADDRESS))
+            if (userManager.CheckEmail(user.EMAIL_ADDRESS))
             {
                 ModelState.AddModelError("EMAIL_ADDRESS", "Email already been used by another account.");
             }
 
             if (ModelState.IsValid)
             {
-                bool result = manager.RegisterUser(user);
+                bool result = userManager.RegisterUser(user);
                 return View("Index");
             }
 
             return View("Register");
-            
         }
 
         public ActionResult Logout()

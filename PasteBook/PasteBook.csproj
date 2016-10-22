@@ -161,9 +161,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Managers\PasteBookAccountManager.cs" />
-    <Compile Include="Managers\PasteBookAppManager.cs" />
+    <Compile Include="Managers\PasteBookViewManager.cs" />
     <Compile Include="Mapper\Mapper.cs" />
+    <Compile Include="Models\CommentModel.cs" />
     <Compile Include="Models\FriendModel.cs" />
     <Compile Include="Models\FriendsViewModel.cs" />
     <Compile Include="Models\LikeModel.cs" />
@@ -223,9 +223,11 @@
     <Content Include="Views\PasteBookApp\Friends.cshtml" />
     <Content Include="Views\PasteBookApp\FeedPostPartialView.cshtml" />
     <Content Include="Views\PasteBookApp\TimeLinePostPartialView.cshtml" />
+    <Content Include="Views\PasteBookApp\NotificationPartialView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\PasteBookHome\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -236,9 +238,13 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\DataAccessLogic\DataAccessLogic.csproj">
+    <ProjectReference Include="..\DataAccessLogic\PasteBookDataAccessLogic.csproj">
       <Project>{cd80187d-f4ca-4b2e-8afa-1b1226009374}</Project>
-      <Name>DataAccessLogic</Name>
+      <Name>PasteBookDataAccessLogic</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PasteBookBusinessLogic\PasteBookBusinessLogic.csproj">
+      <Project>{79a7cbff-254b-4b0f-a72d-a60c9dcca0ac}</Project>
+      <Name>PasteBookBusinessLogic</Name>
     </ProjectReference>
     <ProjectReference Include="..\PasteBookEntityFramework\PasteBookEntityFramework.csproj">
       <Project>{0abd9231-222c-4155-a01a-6c908a840341}</Project>

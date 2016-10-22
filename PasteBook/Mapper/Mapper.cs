@@ -117,5 +117,15 @@ namespace PasteBook
                 LIKED_BY = like.LIKED_BY
             };
         }
+
+        public COMMENT CommentToDB(CommentModel comment)
+        {
+            return new COMMENT()
+            {
+                POST_ID = comment.POST_ID,
+                POSTER_ID = comment.POSTER_ID,
+                CONTENT = comment.CONTENT
+            };
+        }
     }
 }

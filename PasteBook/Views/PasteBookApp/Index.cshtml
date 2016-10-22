@@ -13,7 +13,7 @@
 @{
     <div id="wellPostArea" class="well well-lg">
         <p id="txtPost"><span class="glyphicon glyphicon-pushpin"></span>Paste Something</p>
-        @Html.TextAreaFor(model => model.Post.Content, new { id = "txtAreaPostFeed"})
+        @Html.TextAreaFor(model => model.Post.CONTENT, new { id = "txtAreaPostFeed", placeholder="Write something you want to paste on your wall..."})
         <button id="btnPostFeed" class="btn btn-primary btn-lg pull-right">Paste</button>
     </div>
 }
@@ -24,15 +24,15 @@
     }
 </div>
 
-
 @section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
+    
 
     <script>
         var postUrl = '@Url.Action("Post", "PasteBookApp")';
         var renderPostUrl = '@Url.Action("FeedPostPartialView", "PasteBookApp")';
         var renderPostTLUrl = '@Url.Action("TimeLinePostPartialView", "PasteBookApp")';
         var likeUrl = '@Url.Action("Like", "PasteBookApp")';
+        var commentUrl = '@Url.Action("Comment", "PasteBookApp")';
         var currentUserID = @Session["Userid"];
     </script>
 

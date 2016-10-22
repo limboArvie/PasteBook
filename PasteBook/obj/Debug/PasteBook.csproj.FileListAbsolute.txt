@@ -68,7 +68,6 @@ C:\Users\Bootcamp\Source\Repos\PasteBook\PasteBook\bin\PasteBook.dll.config
 C:\Users\Bootcamp\Source\Repos\PasteBook\PasteBook\bin\PasteBook.dll
 C:\Users\Bootcamp\Source\Repos\PasteBook\PasteBook\bin\PasteBook.pdb
 C:\Users\Bootcamp\Source\Repos\PasteBook\PasteBook\bin\Antlr3.Runtime.dll
-C:\Users\Bootcamp\Source\Repos\PasteBook\PasteBook\bin\DataAccessLogic.dll
 C:\Users\Bootcamp\Source\Repos\PasteBook\PasteBook\bin\EntityFramework.dll
 C:\Users\Bootcamp\Source\Repos\PasteBook\PasteBook\bin\EntityFramework.SqlServer.dll
 C:\Users\Bootcamp\Source\Repos\PasteBook\PasteBook\bin\Microsoft.AI.Agent.Intercept.dll
@@ -81,6 +80,8 @@ C:\Users\Bootcamp\Source\Repos\PasteBook\PasteBook\bin\Microsoft.ApplicationInsi
 C:\Users\Bootcamp\Source\Repos\PasteBook\PasteBook\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
 C:\Users\Bootcamp\Source\Repos\PasteBook\PasteBook\bin\Microsoft.Web.Infrastructure.dll
 C:\Users\Bootcamp\Source\Repos\PasteBook\PasteBook\bin\Newtonsoft.Json.dll
+C:\Users\Bootcamp\Source\Repos\PasteBook\PasteBook\bin\PasteBookBusinessLogic.dll
+C:\Users\Bootcamp\Source\Repos\PasteBook\PasteBook\bin\PasteBookDataAccessLogic.dll
 C:\Users\Bootcamp\Source\Repos\PasteBook\PasteBook\bin\PasteBookEntityFramework.dll
 C:\Users\Bootcamp\Source\Repos\PasteBook\PasteBook\bin\System.Web.Helpers.dll
 C:\Users\Bootcamp\Source\Repos\PasteBook\PasteBook\bin\System.Web.Mvc.dll
@@ -90,7 +91,8 @@ C:\Users\Bootcamp\Source\Repos\PasteBook\PasteBook\bin\System.Web.WebPages.Deplo
 C:\Users\Bootcamp\Source\Repos\PasteBook\PasteBook\bin\System.Web.WebPages.dll
 C:\Users\Bootcamp\Source\Repos\PasteBook\PasteBook\bin\System.Web.WebPages.Razor.dll
 C:\Users\Bootcamp\Source\Repos\PasteBook\PasteBook\bin\WebGrease.dll
-C:\Users\Bootcamp\Source\Repos\PasteBook\PasteBook\bin\DataAccessLogic.pdb
+C:\Users\Bootcamp\Source\Repos\PasteBook\PasteBook\bin\PasteBookDataAccessLogic.pdb
+C:\Users\Bootcamp\Source\Repos\PasteBook\PasteBook\bin\PasteBookBusinessLogic.pdb
 C:\Users\Bootcamp\Source\Repos\PasteBook\PasteBook\bin\PasteBookEntityFramework.pdb
 C:\Users\Bootcamp\Source\Repos\PasteBook\PasteBook\bin\EntityFramework.xml
 C:\Users\Bootcamp\Source\Repos\PasteBook\PasteBook\bin\EntityFramework.SqlServer.xml

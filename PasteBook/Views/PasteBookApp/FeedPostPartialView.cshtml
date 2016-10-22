@@ -6,34 +6,47 @@
         {
             <div id="wellPostFeed" class="well well-lg">
                 @{
+                    if (item.LIKEs.Any(x => x.LIKED_BY == (int)Session["Userid"]))
+                    {
+                        <button class="btnLike btn btn-warning" value=@item.ID disabled><span class="glyphicon glyphicon-star"></span>Liked</button>
+                    }
+
+                    else
+                    {
+                        <button class="btnLike btn btn-primary" value=@item.ID><span class="glyphicon glyphicon-star"></span>Like</button>
+                    }
+                }
+
+                @{
                     if (@item.POSTER_ID != @item.PROFILE_OWNER_ID)
                     {
-                        <p>@item.POSTER_NAME --> @item.PROFILE_OWNER_NAME</p>
+                        <a class="txtPoster" href="@Url.Action("UserProfile", "PasteBookApp", new { userID = @item.USER.USER_NAME })">@item.USER.FIRST_NAME @item.USER.LAST_NAME</a><span class="glyphicon glyphicon-arrow-right"></span><a class="txtPoster" href="@Url.Action("UserProfile", "PasteBookApp", new { userID = @item.USER1.USER_NAME })">@item.USER1.FIRST_NAME @item.USER1.LAST_NAME</a>
                     }
 
                     else
                     {
-                        <p>@item.POSTER_NAME</p>
+                        <a class="txtPoster" href="@Url.Action("UserProfile", "PasteBookApp", new { userID = @item.USER.USER_NAME })">@item.USER.FIRST_NAME @item.USER.LAST_NAME</a>
                     }
                 }
-                <p>@item.Content</p>
-                @Html.Label(item.CREATED_DATE.ToString("MMMM dd, yyyy"))
-                <br />
-                @{
-                    if (item.LikeIndicator == true)
-                    {
-                        <button class="btn btn-success" value=@item.ID disabled>Liked</button>
-                    }
-
-                    else
-                    {
-                        <button class="btnLike" value=@item.ID>Like</button>
-                    }
-                }
+                <p>@item.CREATED_DATE.ToString("dddd, MMMM dd, yyyy HH:mm:ss tt")</p>
                 
+                <p class="postContent">@item.CONTENT</p>
+                <button class="btn btn-success glyphicon glyphicon-star">@item.LIKEs.Count()</button>
+                <button class="btn btn-success glyphicon glyphicon-comment">@item.COMMENTs.Count()</button>
                 <br />
-                @Html.TextArea("CommentFeed", new { row = "2" })
-                <button>Comment</button>
+               
+                    @Html.TextArea("CommentFeed", new { @class = "txtAreaComment", id=@item.ID, placeholder = "Paste your comment..."})
+                    <button class="btnComment btn btn-primary" value="@item.ID">Comment</button>
+
+                @{
+                    foreach (var comment in item.COMMENTs)
+                    {
+                        <a class="txtCommentor" href="@Url.Action("UserProfile", "PasteBookApp", new { userID = @comment.USER.USER_NAME })">@comment.USER.FIRST_NAME @comment.USER.LAST_NAME</a>
+                            <p>@comment.CONTENT</p>
+                    }
+
+                }
+
             </div>
         }
     }

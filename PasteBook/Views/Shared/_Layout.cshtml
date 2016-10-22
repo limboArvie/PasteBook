@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title | PasteBook</title>
-    <link rel="icon" href="~/Content/Images/pastebookIcon.ico" type="image/x-icon"/>
+    <link rel="icon" href="~/Content/Images/pastebookIcon.ico" type="image/x-icon" />
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 </head>
@@ -12,53 +12,50 @@
     <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
                 @{
                     if (Session["User"] == null)
                     {
-                        <a href='@Url.Action("Index", "PasteBookAccount")'>
-                            <img id="imgLogo" src='@Url.Content("~/Content/Images/pastebookLogo.png")' />
-                        </a>
+                        <a href='@Url.Action("Index", "PasteBookAccount")'><img id="imgLogo" src='@Url.Content("~/Content/Images/pastebookLogo.png")' /></a>
                     }
 
                     else
                     {
-                        <a href='@Url.Action("Index", "PasteBookApp")'>
-                            <img id="imgLogo" src='@Url.Content("~/Content/Images/pastebookLogo.png")' />
-                        </a>
+                        <a href='@Url.Action("Index", "PasteBookApp")'><img id="imgLogo" src='@Url.Content("~/Content/Images/pastebookLogo.png")' /></a>
                     }
+
                 }
-                
             </div>
-            <div class="navbar-collapse collapse">
+            @{
+                if (Session["User"] != null)
+                {
+                    <ul class="nav navbar-nav">
+                        <li>@Html.TextBox("SearchField", null, new { id = "searchBar", @class = "form-control pull-right", placeholder = "Search PasteBook" })</li>
+                        <li><button id="btnSearch" class="btn btn-primary"><span class="glyphicon glyphicon-search"></span></button></li>
+                    </ul>
+                }
+            }
                 @{
                     if (Session["User"] != null)
                     {
-                        <div class="nav navbar-nav navbar-right dropdown">
-                            @Html.TextBox("Search")
-                            <a href="" data-toggle="dropdown" class="dropdown-toggle">Hello, @Session["User"]<span class="caret"></span></a>
-                            <ul class="dropdown-menu">
-                                <li>@Html.ActionLink("Profile","UserProfile", "PasteBookApp", new { userID = Session["User"]}, null)</li>
-                                <li><a href="#">Settings</a></li>
-                                <li><a href="@Url.Action("Logout", "PasteBookAccount")">Logout</a></li>
-                            </ul>
-                        </div>
+                        <ul id="homeNavLinks" class="nav navbar-nav navbar-static-top">
+                            <li><button id="btnHome" class="btn btn-primary pull-right" onclick="location.href='@Url.Action("Index", "PasteBookApp")'"><span class="glyphicon glyphicon-home pull-left"></span></button></li>
+                            <li>@{Html.RenderAction("NotificationPartialView", "PasteBookApp");}<li>
+                            <li><button id="btnProfile" class="btn btn-primary pull-right" onclick="location.href='@Url.Action("UserProfile", "PasteBookApp", new { userID = Session["User"] })'"><span class="glyphicon glyphicon-user"></span><span id="txtButtonUser">@Session["User"]</span></button></li>
+                        </ul>
+
+                        <button id="btnLogout" class="btn btn-primary" onclick="location.href='@Url.Action("Logout", "PasteBookAccount")'"><span class="glyphicon glyphicon-log-out"></span>  Logout</button>                        
                     }
 
                     else
                     {
                         <ul class="nav navbar-nav navbar-right">
-                            <li>@Html.ActionLink("Home", "Index", "PasteBookAccount")</li>
-                            <li>@Html.ActionLink("Login", "Login", "PasteBookAccount")</li>
-                            <li>@Html.ActionLink("Register", "Register", "PasteBookAccount")</li>
+                            <li><button id="btnStart" class="btn btn-primary" onclick="location.href='@Url.Action("Index", "PasteBookAccount")'"><span class="glyphicon glyphicon-home"></span> Home</button></li>
+                            <li><button id="btnLogout" class="btn btn-primary" onclick="location.href='@Url.Action("Login", "PasteBookAccount")'"><span class="glyphicon glyphicon-log-in"></span>  Login</button></li>
+                            <li><button id="btnLogout" class="btn btn-primary" onclick="location.href='@Url.Action("Register", "PasteBookAccount")'"><span class="glyphicon glyphicon-list-alt"></span>  Register</button></li>
                         </ul>
                     }
                 }
-            </div>
+            
         </div>
     </div>
     <div class="container body-content">

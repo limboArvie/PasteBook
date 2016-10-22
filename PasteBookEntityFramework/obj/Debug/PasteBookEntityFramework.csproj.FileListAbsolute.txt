@@ -7,4 +7,3 @@ C:\Users\Bootcamp\Source\Repos\PasteBook\PasteBookEntityFramework\bin\Debug\Enti
 C:\Users\Bootcamp\Source\Repos\PasteBook\PasteBookEntityFramework\bin\Debug\EntityFramework.SqlServer.xml
 C:\Users\Bootcamp\Source\Repos\PasteBook\PasteBookEntityFramework\obj\Debug\PasteBookEntityFramework.dll
 C:\Users\Bootcamp\Source\Repos\PasteBook\PasteBookEntityFramework\obj\Debug\PasteBookEntityFramework.pdb
-C:\Users\Bootcamp\Source\Repos\PasteBook\PasteBookEntityFramework\obj\Debug\PasteBookEntityFramework.csprojResolveAssemblyReference.cache
