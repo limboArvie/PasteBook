@@ -8,8 +8,15 @@
 
     ViewBag.Title = "Friends";
 }
+    
+    <div id="pendingRequest">
+        @{ 
+            Html.RenderAction("PendingRequestPartialView", "PasteBookApp", new { model = Model });
+        }
+        
+    </div>
 
-    <h1>Friends</h1>
+    <h1>Friends(@Model.FriendList.Count())</h1>
     <div>
         @{
             foreach (var item in Model.FriendList)
@@ -47,3 +54,16 @@
             }
         }
     </div>
+
+@section Scripts {
+    <script>
+            var addFriendUrl = '@Url.Action("AddFriend", "PasteBookApp")';
+            var acceptRequestUrl = '@Url.Action("AcceptRequest", "PasteBookApp")';
+            var ignoreRequestUrl = '@Url.Action("IgnoreRequest", "PasteBookApp")';
+            var currentUserID = @Session["Userid"];
+            var currentProfileID = @Session["CurrentProfile"];
+            var renderPendingRequestUrl = '@Url.Action("PendingRequestPartialView", "PasteBookApp")';
+            var renderFriendsPage = '@Url.Action("friends", "PasteBookApp")'
+    </script>
+    <script src="~/Scripts/pastebookFriend.js"></script>
+}

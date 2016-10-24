@@ -47,6 +47,7 @@ namespace PasteBookDataAccessLogic
                                         .Include("LIKEs.USER")
                                         .Where(x => x.PROFILE_OWNER_ID == id)
                                         .OrderByDescending(x => x.CREATED_DATE)
+                                        .Take(100)
                                         .ToList();
                 }
             }
@@ -91,6 +92,7 @@ namespace PasteBookDataAccessLogic
                 return null;
             }
         }
+
         public List<LIKE> RetrieveLikes()
         {
             try
@@ -98,6 +100,22 @@ namespace PasteBookDataAccessLogic
                 using (var context = new PASTEBOOKEntities())
                 {
                     return context.LIKEs.ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                ErrorList.Add(ex);
+                return null;
+            }
+        }
+
+        public LIKE RetrieveSpecificLike(int post, int user)
+        {
+            try
+            {
+                using (var context = new PASTEBOOKEntities())
+                {
+                    return context.LIKEs.Where(x => x.POST_ID == post && x.LIKED_BY == user).SingleOrDefault();
                 }
             }
             catch (Exception ex)
@@ -129,41 +147,6 @@ namespace PasteBookDataAccessLogic
                 return null;
             }
         }
-
-        //public bool Comment(COMMENT comment)
-        //{
-        //    try
-        //    {
-        //        using (var context = new PASTEBOOKEntities())
-        //        {
-                    
-        //            context.COMMENTs.Add(comment);
-        //            return context.SaveChanges() > 0;
-        //        }
-        //    }
-
-        //    catch (Exception ex)
-        //    {
-        //        ErrorList.Add(ex);
-        //        return false;
-        //    }
-        //}
-
-        //public List<COMMENT> RetrieveComment()
-        //{
-        //    try
-        //    {
-        //        using (var context = new PASTEBOOKEntities())
-        //        {
-        //            return context.COMMENTs
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        errorList.Add(ex);
-        //        return null;
-        //    }
-        //}
 
     }
 }

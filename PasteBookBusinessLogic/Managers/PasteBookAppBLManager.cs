@@ -16,6 +16,7 @@ namespace PasteBookBusinessLogic
         PBGenericDBManager<FRIEND> friendGenericManager = new PBGenericDBManager<FRIEND>();
         PBGenericDBManager<COMMENT> commentGenericManager = new PBGenericDBManager<COMMENT>();
         PBGenericDBManager<NOTIFICATION> notifGenericManager = new PBGenericDBManager<NOTIFICATION>();
+        PBGenericDBManager<LIKE> likeGenericManager = new PBGenericDBManager<LIKE>();
 
         public USER GetUserInfo(string username)
         {
@@ -74,24 +75,42 @@ namespace PasteBookBusinessLogic
 
             foreach (var item in friendManager.RetrieveFriends(id))
             {
-                if (item.FRIEND_ID == id)
-                {
-                    item.FRIEND_ID = item.USER_ID;
-                    item.USER_ID = id;
-                }
-
                 listOfFriends.Add(item);
             }
 
             return listOfFriends;
         }
 
-        public List<USER> RetrieveFriendsInfo(List<FRIEND> friends)
+        public List<USER> RetrieveFriendsInfo(List<FRIEND> friends, int id)
         {
             List<USER> friendsInfo = new List<USER>();
 
-            foreach (var item in friends)
+            foreach (var item in friends.Where(x => x.REQUEST == "Y"))
             {
+                if (item.FRIEND_ID == id)
+                {
+                    item.FRIEND_ID = item.USER_ID;
+                    item.USER_ID = id;
+                }
+
+                friendsInfo.Add(GetUserInfo(item.FRIEND_ID));
+            }
+
+            return friendsInfo.OrderBy(x => x.LAST_NAME).ToList();
+        }
+
+        public List<USER> RetrieveRequestsInfo(List<FRIEND> friends, int id)
+        {
+            List<USER> friendsInfo = new List<USER>();
+
+            foreach (var item in friends.Where(x => x.REQUEST == "N" && x.USER_ID != id))
+            {
+                if (item.FRIEND_ID == id)
+                {
+                    item.FRIEND_ID = item.USER_ID;
+                    item.USER_ID = id;
+                }
+
                 friendsInfo.Add(GetUserInfo(item.FRIEND_ID));
             }
 
@@ -122,9 +141,31 @@ namespace PasteBookBusinessLogic
             return result;
         }
 
+        public bool AcceptRequest(FRIEND friend)
+        {
+            return friendGenericManager.Edit(friend);
+        }
+
+        public bool DeleteRequest(FRIEND friend)
+        {
+            return friendGenericManager.Delete(friend);
+        }
+
+        public FRIEND RetrieveFriendship(int user, int friend)
+        {
+            return friendManager.RetrieveFriendship(user, friend);
+        }
+
         public bool LikePost(LIKE like)
         {
             POST post = postManager.RetrieveSpecificPost(like.POST_ID);
+            LIKE likeResult = postManager.RetrieveSpecificLike(like.POST_ID, like.LIKED_BY);
+
+            if (likeResult != null)
+            {
+                return likeGenericManager.Delete(likeResult);
+            }
+
             bool result = postManager.LikePost(like);
 
             if(result == true && post.POSTER_ID != like.LIKED_BY)

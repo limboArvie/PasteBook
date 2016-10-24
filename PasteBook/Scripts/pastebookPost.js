@@ -60,6 +60,8 @@
 
     $(document).on('click','.btnLike', function () {
 
+        var currentLocation = window.location;
+
         var data = {
             "ID": null,
             "LIKED_BY": currentUserID,
@@ -71,7 +73,14 @@
             data: data,
             type: 'POST',
             success: function (data) {
-                LikeSuccess(data);
+                if (currentLocation.pathname == "/PasteBookApp") {
+                    LikeFSuccess(data);
+                }
+
+                else {
+                    LikeTLSuccess(data);
+                }
+                
             },
                 
             error: function () {
@@ -139,8 +148,12 @@
         $('#divTimeLinePost').load(renderPostTLUrl)
     }
 
-    function LikeSuccess(data) {
+    function LikeFSuccess(data) {
         $('#divFeedPost').load(renderPostUrl);
+    }
+
+    function LikeTLSuccess(data) {
+        $('#divTimeLinePost').load(renderPostTLUrl);
     }
 
     function CommentFSuccess(data) {

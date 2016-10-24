@@ -59,24 +59,6 @@ namespace PasteBookDataAccessLogic
             }
         }
 
-        //public bool RegisterUser(USER user)
-        //{
-        //    try
-        //    {
-        //        using (var context = new PASTEBOOKEntities())
-        //        {
-        //            context.USERs.Add(user);
-        //            return context.SaveChanges() > 0;
-        //        }
-        //    }
-
-        //    catch (Exception ex)
-        //    {
-        //        ErrorList.Add(ex);
-        //        return false;
-        //    }
-        //}
-
         public USER Login(USER user)
         {
             try
@@ -116,6 +98,23 @@ namespace PasteBookDataAccessLogic
                 using (var context = new PASTEBOOKEntities())
                 {
                     return context.USERs.Include("REF_COUNTRY").Where(x => x.ID == userID).SingleOrDefault();
+                }
+            }
+            catch (Exception ex)
+            {
+                ErrorList.Add(ex);
+                return null;
+            }
+        }
+
+        public List<USER> SearchUser(string searchString)
+        {
+            try
+            {
+                using (var context = new PASTEBOOKEntities())
+                {
+                    return context.USERs.Include("REF_COUNTRY").Where(x => x.FIRST_NAME == searchString || x.LAST_NAME == searchString).ToList();
+                    //return context.USERs.Include("REF_COUNTRY").Where(x => x.FIRST_NAME.Contains(searchString) || x.LAST_NAME.Contains(searchString)).ToList();
                 }
             }
             catch (Exception ex)

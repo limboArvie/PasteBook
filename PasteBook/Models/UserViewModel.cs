@@ -6,9 +6,9 @@ using System.Web;
 
 namespace PasteBook.Models
 {
-    public class FriendsViewModel
+    public class UserViewModel
     {
-        public List<USER> FriendList { get; set; }
-        public List<USER> RequestList { get; set; }
+        public List<USER> UserList { get; set; }
+        public string SearchKey { get; set; }
     }
 }

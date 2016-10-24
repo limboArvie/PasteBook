@@ -14,11 +14,14 @@ namespace PasteBook.Controllers
         PasteBookViewModel pasteBook = new PasteBookViewModel();
         PasteBookAppBLManager appManager = new PasteBookAppBLManager();
         UserBLManager userManager = new UserBLManager();
-        List<LIKE> listOfLikes = new List<LIKE>();
-
 
         public ActionResult Index()
         {
+            if(Session["Userid"] == null)
+            {
+                return RedirectToAction("Login", "PasteBookAccount");
+            }
+
             Session["CurrentProfile"] = 0;
             return View(pasteBook);
         }
@@ -29,7 +32,6 @@ namespace PasteBook.Controllers
             USER currentUser = new USER();
 
             listOfPosts = appManager.RetrieveFeedPosts((int)Session["Userid"]);
-
             pasteBook.ListOfPost = listOfPosts.ToList();
             return PartialView("FeedPostPartialView", pasteBook);
         }
@@ -40,18 +42,32 @@ namespace PasteBook.Controllers
             currentUser = appManager.GetUserInfo(userID);
             Session["CurrentProfile"] = currentUser.ID;
             pasteBook.User = currentUser;
-            pasteBook.ListOfFriend = appManager.RetrieveFriends((int)Session["Userid"]);
-
             return View(pasteBook);
         }
 
         public ActionResult TimeLinePostPartialView(PasteBookViewModel model)
         {
-            List<POST> listOfPosts = new List<POST>();
-            UserModel currentUser = new UserModel();
-            listOfPosts = appManager.RetrieveTimeLinePosts((int)Session["CurrentProfile"]);
-            pasteBook.ListOfPost = listOfPosts.ToList();
-            return PartialView("TimeLinePostPartialView", pasteBook);
+            model.ListOfPost = appManager.RetrieveTimeLinePosts((int)Session["CurrentProfile"]);
+            return PartialView("TimeLinePostPartialView", model);
+        }
+
+        public ActionResult ProfileBannerPartialView(PasteBookViewModel model)
+        {
+            USER currentUser = new USER();
+            currentUser = appManager.GetUserInfo((int)Session["CurrentProfile"]);
+            model.User = currentUser;
+            model.ListOfFriend = appManager.RetrieveFriends((int)Session["Userid"]);
+            return PartialView("ProfileBannerPartialView", model);
+        }
+
+        public ActionResult PendingRequestPartialView(FriendsViewModel model)
+        {
+            List<FRIEND> requestList = new List<FRIEND>();
+            List<USER> requestsInfo = new List<USER>();
+
+            requestList = appManager.RetrieveFriends((int)Session["Userid"]);
+            model.RequestList = appManager.RetrieveRequestsInfo(requestList, (int)Session["Userid"]);
+            return PartialView("PendingRequestPartialView", model);
         }
 
         public ActionResult NotificationPartialView()
@@ -67,9 +83,9 @@ namespace PasteBook.Controllers
             List<USER> friendsInfo = new List<USER>();
             FriendsViewModel friendsModel = new FriendsViewModel();
 
-            friendList = appManager.RetrieveFriends((int)Session["Userid"]).Where(x => x.REQUEST == "Y").ToList();
-            friendsInfo = appManager.RetrieveFriendsInfo(friendList);
-            friendsModel.FriendList = friendsInfo;
+            friendList = appManager.RetrieveFriends((int)Session["Userid"]);
+            friendsInfo = appManager.RetrieveFriendsInfo(friendList, (int)Session["Userid"]);
+            friendsModel.FriendList = friendsInfo;         
             return View(friendsModel);
         }
 
@@ -101,6 +117,24 @@ namespace PasteBook.Controllers
             return Json(new { addFriendResult = result }, JsonRequestBehavior.AllowGet);
         }
 
+        public JsonResult AcceptRequest(FRIEND friend)
+        {
+            FRIEND friendship = appManager.RetrieveFriendship(friend.USER_ID, friend.FRIEND_ID);
+            friend.ID = friendship.ID;
+            friend.CREATED_DATE = friendship.CREATED_DATE;
+            var result = appManager.AcceptRequest(friend);
+            return Json(new { acceptRequestResult = result }, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult IgnoreRequest(FRIEND friend)
+        {
+            FRIEND friendship = appManager.RetrieveFriendship(friend.USER_ID, friend.FRIEND_ID);
+            friend.ID = friendship.ID;
+            friend.CREATED_DATE = friendship.CREATED_DATE;
+            var result = appManager.DeleteRequest(friend);
+            return Json(new { ignoreRequestResult = result }, JsonRequestBehavior.AllowGet);
+        }
+
         public JsonResult Post(POST post)
         {
             int currentProfile = (int)Session["CurrentProfile"];
@@ -118,6 +152,14 @@ namespace PasteBook.Controllers
         {
             var result = appManager.Comment(comment);
             return Json(new { likeResult = result }, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult Search(string searchString)
+        {
+            UserViewModel searchFriends = new UserViewModel();
+            searchFriends.SearchKey = searchString;
+            searchFriends.UserList = userManager.SearchUser(searchString);
+            return View(searchFriends);
         }
 
     }

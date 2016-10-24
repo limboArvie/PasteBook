@@ -171,6 +171,7 @@
     <Compile Include="Models\PostModel.cs" />
     <Compile Include="Models\Ref_CountryModel.cs" />
     <Compile Include="Models\UserModel.cs" />
+    <Compile Include="Models\UserViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -224,6 +225,9 @@
     <Content Include="Views\PasteBookApp\FeedPostPartialView.cshtml" />
     <Content Include="Views\PasteBookApp\TimeLinePostPartialView.cshtml" />
     <Content Include="Views\PasteBookApp\NotificationPartialView.cshtml" />
+    <Content Include="Views\PasteBookApp\Search.cshtml" />
+    <Content Include="Views\PasteBookApp\ProfileBannerPartialView.cshtml" />
+    <Content Include="Views\PasteBookApp\PendingRequestPartialView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

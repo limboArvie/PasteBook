@@ -1,0 +1,38 @@
+﻿@model PasteBook.Models.PasteBookViewModel
+
+<div class="row formField">
+    <div class="col-md-12">
+        @Html.DisplayFor(model => model.User.FIRST_NAME)
+        @Html.DisplayFor(model => model.User.LAST_NAME)
+    </div>
+
+    <div id="txtuserName" class="col-md-12">
+        (@Html.DisplayFor(model => model.User.USER_NAME))
+    </div>
+
+    <div id="txtEmail" class="col-md-12">
+        @Html.DisplayFor(model => model.User.EMAIL_ADDRESS)
+    </div>
+    @{
+        if ((string)Session["User"] != Model.User.USER_NAME && Model.ListOfFriend.Any(x => (x.FRIEND_ID == (int)Session["CurrentProfile"] || x.USER_ID == (int)Session["CurrentProfile"]) && x.REQUEST == "Y"))
+        {
+            <button id="btnFriends" class="btn btn-success col-md-3" disabled>Friends</button>
+        }
+
+        else if (Model.ListOfFriend.Any(x => x.FRIEND_ID == (int)Session["CurrentProfile"] && x.REQUEST == "N") && (string)Session["User"] != Model.User.USER_NAME)
+        {
+            <button id="btnFRequest" class="btn btn-warning col-md-3" disabled>Friend Request Sent</button>
+        }
+
+        else if (Model.ListOfFriend.Any(x => x.USER_ID == (int)Session["CurrentProfile"] && x.REQUEST == "N") && (string)Session["User"] != Model.User.USER_NAME)
+        {
+            <button class="btnAcceptRequest btn btn-success col-md-3" value=@Model.User.ID>Accept Request</button>
+                <button class="btnIgnoreRequest btn btn-danger col-md-3" value=@Model.User.ID>Ignore Request</button>
+        }
+
+        else if (Model.ListOfFriend.Any(x => x.FRIEND_ID != (int)Session["CurrentProfile"]) && (string)Session["User"] != Model.User.USER_NAME || Model.ListOfFriend.Count() == 0)
+        {
+            <button id="btnAddFriend" class="btn btn-primary col-md-3">Add Friend</button>
+        }
+    }
+</div>

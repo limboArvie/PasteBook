@@ -74,6 +74,11 @@ namespace PasteBookBusinessLogic
             }
         }
 
+        public List<USER> SearchUser(string searchString)
+        {
+            return userManager.SearchUser(searchString);
+        }
+
         private string GeneratePasswordHash(string password, out string salt)
         {
             SaltGenerator saltGen = new SaltGenerator();

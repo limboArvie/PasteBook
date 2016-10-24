@@ -1,0 +1,58 @@
+﻿@model PasteBook.Models.UserViewModel
+
+@{
+    if (Session["User"] == null)
+    {
+        Response.Redirect("~/PasteBookAccount/Login");
+    }
+
+    ViewBag.Title = "Search Results for " + Model.SearchKey;
+}
+
+<div>
+    <h1>Search Results</h1>
+    @{
+        if(Model.UserList.Count() == 0)
+        {
+            <p>No results found for "@Model.SearchKey"</p>
+        }
+
+        else
+        {
+           <p> Results for @Model.SearchKey </p>
+        }
+        foreach (var item in Model.UserList)
+        {
+            <div id="friendBanner" class="well well-lg col-md-12">
+                <div class="row formField">
+                    <div class="col-md-3">
+                        @{
+                            if (@item.PROFILE_PIC != null)
+                            {
+                                <img id="imgProfile" src="data:image;base64,@System.Convert.ToBase64String(@item.PROFILE_PIC)" class="img-thumbnail img-responsive" alt="Profile Picture">
+                            }
+
+                            else
+                            {
+                                <img id="imgProfile" src="~/Content/Images/pastebookDefaultImage.png" class="img-thumbnail img-responsive" alt="Profile Picture">
+                            }
+                        }
+
+                    </div>
+
+                    <div id="txtfullName" class="col-md-9">
+                        <div class="row formField">
+                            <div class="col-md-12">
+                                <p>@item.FIRST_NAME @item.LAST_NAME</p>
+                            </div>
+                            <div id="txtuserName" class="col-md-12">
+                                (@Html.DisplayFor(model => item.USER_NAME))
+                            </div>
+                            <button class="btnViewProfile btn btn-primary" onclick="location.href='@Url.Action("UserProfile", "PasteBookApp", new { userID = @item.USER_NAME})'"><span class="glyphicon glyphicon-eye-open"></span> View Profile</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    }
+</div>

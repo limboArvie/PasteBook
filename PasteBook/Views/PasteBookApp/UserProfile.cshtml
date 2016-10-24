@@ -24,17 +24,17 @@
                         <img id="imgProfile" src="~/Content/Images/pastebookDefaultImage.png" class="img-thumbnail img-responsive" alt="Profile Picture">
                     }
                 }
-                
+
                 @{
                     if ((string)Session["User"] == Model.User.USER_NAME)
                     {
                         <button id="btnEditPicture" class="btn btn-primary" data-toggle="modal" data-target="#uploadPicModal"><span class="glyphicon glyphicon-pencil"></span>Edit Profile Picture</button>
                     }
                 }
-                
+
             </div>
 
-            <!-- Modal -->
+            <!-- Modal for Edit Profile Picture-->
             <div id="uploadPicModal" class="modal fade" role="dialog">
                 <div class="modal-dialog">
 
@@ -44,7 +44,7 @@
                             <button type="button" class="close" data-dismiss="modal">&times;</button>
                             <h4 class="modal-title">Upload New Profile Picture</h4>
                         </div>
-                        
+
                         <div class="modal-body">
                             @using (Html.BeginForm("EditProfilePicture", "PasteBookApp", FormMethod.Post, new { enctype = "multipart/form-data" }))
                             {
@@ -53,7 +53,7 @@
                                 <input type="submit" value="Save Profile Picture" class="submit" />
                             }
                         </div>
-                        
+
                         <div class="modal-footer">
                             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                         </div>
@@ -61,41 +61,14 @@
 
                 </div>
             </div>
-
             <div id="txtfullName" class="col-md-9">
-                <div class="row formField">
-                    <div class="col-md-12">
-                        @Html.DisplayFor(model => model.User.FIRST_NAME)
-                        @Html.DisplayFor(model => model.User.LAST_NAME)
-                    </div>
+                @{
+                    Html.RenderAction("ProfileBannerPartialView", "PasteBookApp", new { model = Model });
+                }
+            </div>
 
-                    <div id="txtuserName" class="col-md-12">
-                        (@Html.DisplayFor(model => model.User.USER_NAME))
-                    </div>
-
-                    <div id="txtEmail" class="col-md-12">
-                        @Html.DisplayFor(model => model.User.EMAIL_ADDRESS)
-                    </div>
-                    @{
-                        if ((string)Session["User"] != Model.User.USER_NAME && Model.ListOfFriend.Any(x => x.FRIEND_ID == (int)Session["CurrentProfile"] && x.REQUEST =="Y"))
-                        {
-                            <button id="btnFriends" class="btn btn-success col-md-3" disabled>Friends</button>
-                        }
-
-                        else if (Model.ListOfFriend.Any(x => x.FRIEND_ID == (int)Session["CurrentProfile"] && x.REQUEST == "N"))
-                        {
-                            <button id="btnFRequest" class="btn btn-warning col-md-3" disabled>Friend Request Sent</button>
-                        }
-
-                        else if(Model.ListOfFriend.Any(x => x.FRIEND_ID != (int)Session["CurrentProfile"]) && (string)Session["User"] != Model.User.USER_NAME)
-                        {
-                            <button id="btnAddFriend" class="btn btn-primary col-md-3">Add Friend</button>
-                        }
-                    }
-                </div>
             </div>
         </div>
-    </div>
 
     <div id="wellMenu" class="well well-lg col-md-3">
         <button class="btn btn-primary btn-lg btnMenu" onclick="location.href='@Url.Action("friends", "PasteBookApp")'"><span class="glyphicon glyphicon-user pull-left iconMenu"></span>Friends</button>
@@ -179,19 +152,26 @@
             </div>
         </div>
     </div>
-    <div class="col-md-6">
-        <div id="wellPostProfileArea" class="well well-lg">
-            <p id="txtPost"><span class="glyphicon glyphicon-pushpin"></span>Paste Something</p>
-            @Html.TextAreaFor(model => model.Post.CONTENT, new { id = "txtAreaPostTimeLine" })
-            <button id="btnPostTimeLine" class="btn btn-primary btn-lg pull-right">Paste</button>
-        </div>
+    @{
+        if (Model.ListOfFriend.Any(x => x.FRIEND_ID == (int)Session["CurrentProfile"] || x.USER_ID == (int)Session["CurrentProfile"]))
+        {
+            <div class="col-md-6">
+                <div id="wellPostProfileArea" class="well well-lg">
+                    <p id="txtPost"><span class="glyphicon glyphicon-pushpin"></span>Paste Something</p>
+                    @Html.TextAreaFor(model => model.Post.CONTENT, new { id = "txtAreaPostTimeLine" , placeholder = "Paste something here..."})
+                    <button id="btnPostTimeLine" class="btn btn-primary btn-lg pull-right">Paste</button>
+                </div>
 
-        <div id="divTimeLinePost">
-            @{
-                Html.RenderAction("TimeLinePostPartialView", "PasteBookApp", new { user = Model});
-            }
-        </div>
-    </div>
+                <div id="divTimeLinePost">
+                    @{
+                        Html.RenderAction("TimeLinePostPartialView", "PasteBookApp", new { user = Model });
+                    }
+                </div>
+            </div>
+         }
+
+    }
+    
 </div>
 
 @section Scripts {
@@ -199,7 +179,10 @@
         var postTLUrl = '@Url.Action("Post", "PasteBookApp")';
                             var renderPostTLUrl = '@Url.Action("TimeLinePostPartialView", "PasteBookApp")';
                             var likeUrl = '@Url.Action("Like", "PasteBookApp")';
+                            var renderProfileBannerUrl = '@Url.Action("ProfileBannerPartialView", "PasteBookApp")';
                             var addFriendUrl = '@Url.Action("AddFriend", "PasteBookApp")';
+                            var acceptRequestUrl = '@Url.Action("AcceptRequest", "PasteBookApp")';
+                            var ignoreRequestUrl = '@Url.Action("IgnoreRequest", "PasteBookApp")';
                             var commentTLUrl = '@Url.Action("Comment", "PasteBookApp")';
                             var currentUserID = @Session["Userid"];
                             var currentProfileID = @Session["CurrentProfile"];

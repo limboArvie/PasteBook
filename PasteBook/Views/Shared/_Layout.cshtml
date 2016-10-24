@@ -29,8 +29,11 @@
                 if (Session["User"] != null)
                 {
                     <ul class="nav navbar-nav">
-                        <li>@Html.TextBox("SearchField", null, new { id = "searchBar", @class = "form-control pull-right", placeholder = "Search PasteBook" })</li>
-                        <li><button id="btnSearch" class="btn btn-primary"><span class="glyphicon glyphicon-search"></span></button></li>
+                        <li>@using (Html.BeginForm("Search", "PasteBookApp", FormMethod.Post))
+                        {
+                            @Html.TextBox("searchString", null, new { id = "searchBar", @class = "form-control pull-left", placeholder = "Search PasteBook" })
+                            <button type="submit" id="btnSearch" class="btn btn-primary pull-right" title="Search"><span class="glyphicon glyphicon-search"></span></button>
+                        }</li>
                     </ul>
                 }
             }
@@ -38,9 +41,9 @@
                     if (Session["User"] != null)
                     {
                         <ul id="homeNavLinks" class="nav navbar-nav navbar-static-top">
-                            <li><button id="btnHome" class="btn btn-primary pull-right" onclick="location.href='@Url.Action("Index", "PasteBookApp")'"><span class="glyphicon glyphicon-home pull-left"></span></button></li>
+                            <li><button id="btnHome" class="btn btn-primary pull-right" onclick="location.href='@Url.Action("Index", "PasteBookApp")'" title="Home"><span class="glyphicon glyphicon-home pull-left"></span></button></li>
                             <li>@{Html.RenderAction("NotificationPartialView", "PasteBookApp");}<li>
-                            <li><button id="btnProfile" class="btn btn-primary pull-right" onclick="location.href='@Url.Action("UserProfile", "PasteBookApp", new { userID = Session["User"] })'"><span class="glyphicon glyphicon-user"></span><span id="txtButtonUser">@Session["User"]</span></button></li>
+                            <li><button id="btnProfile" class="btn btn-primary pull-right" onclick="location.href='@Url.Action("UserProfile", "PasteBookApp", new { userID = Session["User"] })'" title="Profile"><span class="glyphicon glyphicon-user"></span><span id="txtButtonUser">@Session["User"]</span></button></li>
                         </ul>
 
                         <button id="btnLogout" class="btn btn-primary" onclick="location.href='@Url.Action("Logout", "PasteBookAccount")'"><span class="glyphicon glyphicon-log-out"></span>  Logout</button>                        

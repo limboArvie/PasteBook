@@ -7,7 +7,7 @@
             @{
                 if (item.LIKEs.Any(x => x.LIKED_BY == (int)Session["Userid"]))
                 {
-                    <button class="btnLike btn btn-warning" value=@item.ID disabled><span class="glyphicon glyphicon-star"></span>Liked</button>
+                    <button class="btnLike btn btn-warning" value=@item.ID><span class="glyphicon glyphicon-star"></span>Liked</button>
                 }
 
                 else
@@ -16,25 +16,48 @@
                 }
             }
 
-            @{
-                if (@item.POSTER_ID != @item.PROFILE_OWNER_ID)
-                {
-                    <a class="txtPoster" href="@Url.Action("UserProfile", "PasteBookApp", new { userID = @item.USER.USER_NAME })">@item.USER.FIRST_NAME @item.USER.LAST_NAME</a><span class="glyphicon glyphicon-arrow-right"></span><a class="txtPoster" href="@Url.Action("UserProfile", "PasteBookApp", new { userID = @item.USER1.USER_NAME })">@item.USER1.FIRST_NAME @item.USER1.LAST_NAME</a>
-                }
-
-                else
-                {
-                    <a class="txtPoster" href="@Url.Action("UserProfile", "PasteBookApp", new { userID = @item.USER.USER_NAME })">@item.USER.FIRST_NAME @item.USER.LAST_NAME</a>
-                }
-            }
+            <a class="txtPoster" href="@Url.Action("UserProfile", "PasteBookApp", new { userID = @item.USER.USER_NAME })">@item.USER.FIRST_NAME @item.USER.LAST_NAME</a>
             <p>@item.CREATED_DATE.ToString("dddd, MMMM dd, yyyy HH:mm:ss tt")</p>
-            
-            <p class="postContent">@item.CONTENT</p>
-            <button class="btn btn-success glyphicon glyphicon-star">@item.LIKEs.Count()</button>
-            <button class="btn btn-success glyphicon glyphicon-comment">@item.COMMENTs.Count()</button>
-            <br />
 
-            @Html.TextArea("CommentTL", new { @class = "txtAreaCommentTL", id = @item.ID, placeholder = "Paste your comment..."})
+            <p class="postContent">@item.CONTENT</p>
+            
+            <button class="btn btn-success glyphicon glyphicon-star" data-toggle="modal" data-target=".@item.ID" title="@item.LIKEs.Count() liked this post">@item.LIKEs.Count()</button>
+
+            <!-- Modal for Likers, Timeline Post-->
+            <div class="@item.ID modal fade" role="dialog">
+                <div class="modal-dialog">
+
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">People who liked this post</h4>
+                        </div>
+
+                        <div class="modal-body">
+                            @{ 
+                                if (item.LIKEs.Count() == 0)
+                                {
+                                    <p>No likes yet.</p>
+                                }
+                            }
+                            @foreach (var like in item.LIKEs)
+                            {
+                                <a class="txtLiker" href="@Url.Action("UserProfile", "PasteBookApp", new { userID = @like.USER.USER_NAME })">@like.USER.FIRST_NAME @like.USER.LAST_NAME</a><br />
+                            }
+                        </div>
+
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <button class="btn btn-success glyphicon glyphicon-comment" title="@item.COMMENTs.Count() comment(s) for this post">@item.COMMENTs.Count()</button><br />
+
+            @Html.TextArea("CommentTL", new { @class = "txtAreaCommentTL", id = @item.ID, placeholder = "Paste your comment..." })
             <button class="btnCommentTL btn btn-primary" value="@item.ID">Comment</button>
 
             @{
@@ -45,5 +68,5 @@
                 }
             }
         </div>
-     }
+                }
 }

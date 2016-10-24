@@ -147,10 +147,18 @@ select
 
 #wellMenu{
     width: 18%;
-    height: 180px;
+    height: 244px;
     margin-top: 35px;
     background-color: #D4E1EE;
     margin-left: 15px;
+}
+
+#wellMenuFeed{
+    width: 18%;
+    height: 244px;
+    margin-top: -242px;
+    background-color: #D4E1EE;
+    float: right;
 }
 
 #wellPostArea{
@@ -159,11 +167,17 @@ select
     height: 220px;
 }
 
+#wellPostAreaFeed{
+    background-color: #87B5DB;
+    width: 70%;
+    height: 220px;
+}
+
 #wellPostProfileArea{
     background-color: #699CCE;
-    width: 700px;
+    width: 742px;
     height: 220px;
-    margin-left: 40px;
+    margin-left: 15px;
 }
 
 #txtAreaPostFeed, #txtAreaPostTimeLine{
@@ -189,17 +203,17 @@ select
 
 #wellPostTimeline{
     background-color: #E6F3F6;
-    width: 700px;
-    margin-left: 40px;
+    width: 742px;
+    margin-left: 15px;
 }
 
 
 .btnMenu{
-    width: 150px;
-    height: 50px;
-    margin-top: 7px;
+    width: 140px;
+    height: 60px;
+    margin-top: 20px;
     margin-bottom: 7px;
-    margin-left: 5px;
+    margin-left: 10px;
     text-align: left;
 }
 
@@ -216,6 +230,7 @@ select
 #btnSearch, #btnLogout{
     margin-top: 13px;
     margin-left: 10px;
+    margin-right: 45px;
 }
 
 #currentUserArea{
@@ -290,13 +305,12 @@ span.badge{
 }
 
 .pull-right > .dropdown-menu {
-    right: -322px;
-    left: auto;
+    right: auto;
 }
 
 .btn .badge {
     top: -11px;
-    left: -3px;
+    left: -10px;
 }
 
 #txtButtonUser{
@@ -324,6 +338,7 @@ span.badge{
     width: 105px;
     height: 40px;
     float: right;
+    margin-right: 7px;
 }
 
 .txtAreaComment{
@@ -335,7 +350,7 @@ span.badge{
 
 .txtAreaCommentTL{
     resize: none;
-    width: 82%;
+    width: 83%;
     margin-bottom: 20px;
     margin-top: 20px;
 }
@@ -358,4 +373,13 @@ span.badge{
     margin-top: 13px;
     margin-left: 20px;
     height: 35px;
+}
+
+ul.dropdown-menu{
+    max-height: 370px;
+    overflow-y: auto;
+}
+
+div.col-md-4{
+    padding-left: 0;
 }
