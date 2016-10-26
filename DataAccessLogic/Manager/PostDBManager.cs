@@ -135,7 +135,7 @@ namespace PasteBookDataAccessLogic
                                                 .Include("USER1")
                                                 .Include("COMMENT")
                                                 .Include("POST")
-                                                .Where(x => x.RECEIVER_ID == userID && x.SEEN == "N")
+                                                .Where(x => x.RECEIVER_ID == userID)
                                                 .OrderByDescending(x => x.CREATED_DATE)
                                                 .ToList();
                 }

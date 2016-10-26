@@ -64,7 +64,7 @@
                 foreach (var comment in item.COMMENTs)
                 {
                     <a class="txtCommentor" href="@Url.Action("UserProfile", "PasteBookApp", new { userID = @comment.USER.USER_NAME })">@comment.USER.FIRST_NAME @comment.USER.LAST_NAME</a>
-                    <p>@comment.CONTENT</p>
+                    <p class="txtComment">@comment.CONTENT</p>
                 }
             }
         </div>

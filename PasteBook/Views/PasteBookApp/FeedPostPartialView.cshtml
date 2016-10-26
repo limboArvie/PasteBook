@@ -66,7 +66,7 @@
                     </div>
                 </div>
 
-                <button class="btn btn-success glyphicon glyphicon-comment">@item.COMMENTs.Count()</button>
+                <button class="btn btn-success glyphicon glyphicon-comment" title="@item.COMMENTs.Count() comment(s) for this post">@item.COMMENTs.Count()</button>
                 <br />
                
                     @Html.TextArea("CommentFeed", new { @class = "txtAreaComment", id=@item.ID, placeholder = "Paste your comment..."})
@@ -76,7 +76,7 @@
                     foreach (var comment in item.COMMENTs)
                     {
                         <a class="txtCommentor" href="@Url.Action("UserProfile", "PasteBookApp", new { userID = @comment.USER.USER_NAME })">@comment.USER.FIRST_NAME @comment.USER.LAST_NAME</a>
-                            <p>@comment.CONTENT</p>
+                            <p class="txtComment">@comment.CONTENT</p>
                     }
                 }
 

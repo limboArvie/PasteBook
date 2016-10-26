@@ -72,8 +72,13 @@
 
     <div id="wellMenu" class="well well-lg col-md-3">
         <button class="btn btn-primary btn-lg btnMenu" onclick="location.href='@Url.Action("friends", "PasteBookApp")'"><span class="glyphicon glyphicon-user pull-left iconMenu"></span>Friends</button>
-        <button class="btn btn-primary btn-lg btnMenu"><span class="glyphicon glyphicon-cog pull-left iconMenu"></span>Settings</button>
-    </div>
+        <button class="btn btn-primary btn-lg dropdown-toggle btnMenu" data-toggle="dropdown" aria-expanded="false"><span class="glyphicon glyphicon-cog pull-left iconMenu"></span>Settings<span class="caret"></span></button>
+        <ul id="dropSettings" class="dropdown-menu">
+            <li><a href="@Url.Action("ProfileSettings", "PasteBookAccount")"><span class="glyphicon glyphicon-user settingsIcon"></span><span class="dropSettingsText">Profile Settings</span></a></li>
+            <li><a href="@Url.Action("EmailSettings", "PasteBookAccount")"><span class="glyphicon glyphicon-envelope settingsIcon"></span><span class="dropSettingsText">Email Settings</span></a></li>
+            <li><a href="@Url.Action("PasswordSettings", "PasteBookAccount")"><span class="glyphicon glyphicon-lock settingsIcon"></span><span class="dropSettingsText">Password Settings</span></a></li>
+        </ul>
+</div>
 
 </div>
 
@@ -81,17 +86,22 @@
     <div class="col-md-4">
         <div id="wellBasicInfo" class="well well-lg">
             <div class="row">
+                <div class="col-md-12">
+                    <p id="headerBasicInfo">BASIC INFO</p>
+                </div>
+            </div>
+            <div class="row">
                 <div class="col-md-5">
                     @Html.LabelFor(model => model.User.GENDER)
                 </div>
                 <div class="col-md-7">
                     @{
-                        if(@Model.User.GENDER.TrimEnd(' ') == "M")
+                        if(@Model.User.GENDER == "M")
                         {
                             @Html.DisplayName("Male");
                         }
 
-                        else if (@Model.User.GENDER.TrimEnd(' ') == "F")
+                        else if (@Model.User.GENDER == "F")
                         {
                             @Html.DisplayName("Female");
                         }
@@ -109,7 +119,7 @@
                     @Html.LabelFor(model => model.User.BIRTHDAY)
                 </div>
                 <div class="col-md-7">
-                    @Html.DisplayFor(model => model.User.BIRTHDAY)
+                    @Html.DisplayFor(model => model.User.BIRTHDAY, "{0:MMMM dd, yyyy}")
                 </div>
             </div>
 
@@ -134,26 +144,57 @@
 
         <div id="wellAboutMe" class="well well-lg">
             <div class="row">
-                <div class="col-md-4">
-                    @Html.LabelFor(model => model.User.DATE_CREATED)
+                <div class="col-md-10">
+                    <p id="headerAboutMe">ABOUT ME</p>
                 </div>
-                <div class="col-md-8">
-                    @Html.DisplayFor(model => model.User.DATE_CREATED)
+                <button class="btn btn-primary col-md-2 pull-right" data-toggle="modal" data-target="#editAboutModel" title="Edit About Me"><span class="glyphicon glyphicon-pencil"></span></button>
+
+                <!-- Modal for Edit About Me-->
+                <div id="editAboutModel" class="modal fade" role="dialog">
+                    <div class="modal-dialog">
+
+                        <!-- Modal content-->
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                <h4 class="modal-title">Edit About Me</h4>
+                            </div>
+
+                            <div class="modal-body">
+                                @using (Html.BeginForm("EditAboutMe", "PasteBookApp", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                                {
+                                    @Html.TextAreaFor(model => model.User.ABOUT_ME, new { @class = "form-control" })
+                                    <input type="submit" value="Save Changes" class="submit" />
+                                }
+                            </div>
+
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+
+                    </div>
                 </div>
             </div>
-
+            <br />
             <div class="row">
-                <div class="col-md-4">
-                    @Html.LabelFor(model => model.User.ABOUT_ME)
-                </div>
-                <div class="col-md-8">
+                <div class="col-md-12">
                     @Html.DisplayFor(model => model.User.ABOUT_ME)
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-md-8">
+                    @Html.Label("Member of PasteBook since")
+                </div>
+                <div class="col-md-4">
+                    @Html.DisplayFor(model => model.User.DATE_CREATED)
                 </div>
             </div>
         </div>
     </div>
     @{
-        if (Model.ListOfFriend.Any(x => x.FRIEND_ID == (int)Session["CurrentProfile"] || x.USER_ID == (int)Session["CurrentProfile"]))
+        if (Model.ListOfFriend.Any(x => (x.FRIEND_ID == (int)Session["CurrentProfile"] || x.USER_ID == (int)Session["CurrentProfile"]) && x.REQUEST == "Y"))
         {
             <div class="col-md-6">
                 <div id="wellPostProfileArea" class="well well-lg">

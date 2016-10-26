@@ -111,6 +111,14 @@ namespace PasteBook.Controllers
             return RedirectToAction("UserProfile", new { userID = (string)Session["User"] });
         }
 
+        public ActionResult EditAboutMe (PasteBookViewModel model)
+        {
+            USER currentUser = appManager.GetUserInfo((int)Session["Userid"]);
+            currentUser.ABOUT_ME = model.User.ABOUT_ME;
+            userManager.EditUser(currentUser);
+            return RedirectToAction("UserProfile", new { userID = (string)Session["User"] });
+        }
+
         public JsonResult AddFriend(FRIEND friend)
         {
             var result = appManager.AddFriend(friend);

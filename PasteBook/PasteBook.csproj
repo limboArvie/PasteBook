@@ -228,6 +228,9 @@
     <Content Include="Views\PasteBookApp\Search.cshtml" />
     <Content Include="Views\PasteBookApp\ProfileBannerPartialView.cshtml" />
     <Content Include="Views\PasteBookApp\PendingRequestPartialView.cshtml" />
+    <Content Include="Views\PasteBookAccount\EmailSettings.cshtml" />
+    <Content Include="Views\PasteBookAccount\PasswordSettings.cshtml" />
+    <Content Include="Views\PasteBookAccount\ProfileSettings.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

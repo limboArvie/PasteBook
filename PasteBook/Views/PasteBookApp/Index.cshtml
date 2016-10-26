@@ -9,7 +9,6 @@
     ViewBag.Title = "Home";
 }
 
-<h1>News Feed</h1>
 @{
     <div id="wellPostAreaFeed" class="well well-lg">
         <p id="txtPost"><span class="glyphicon glyphicon-pushpin"></span>Paste Something</p>
@@ -19,7 +18,12 @@
 
     <div id="wellMenuFeed" class="well well-lg col-md-3">
         <button class="btn btn-primary btn-lg btnMenu" onclick="location.href='@Url.Action("friends", "PasteBookApp")'"><span class="glyphicon glyphicon-user pull-left iconMenu"></span>Friends</button>
-        <button class="btn btn-primary btn-lg btnMenu"><span class="glyphicon glyphicon-cog pull-left iconMenu"></span>Settings</button>
+        <button class="btn btn-primary btn-lg dropdown-toggle btnMenu" data-toggle="dropdown" aria-expanded="false"><span class="glyphicon glyphicon-cog pull-left iconMenu"></span>Settings<span class="caret"></span></button>
+        <ul id="dropSettings" class="dropdown-menu">
+            <li><a href="@Url.Action("ProfileSettings", "PasteBookAccount")"><span class="glyphicon glyphicon-user settingsIcon"></span><span class="dropSettingsText">Profile Settings</span></a></li>
+            <li><a href="@Url.Action("EmailSettings", "PasteBookAccount")"><span class="glyphicon glyphicon-envelope settingsIcon"></span><span class="dropSettingsText">Email Settings</span></a></li>
+            <li><a href="@Url.Action("PasswordSettings", "PasteBookAccount")"><span class="glyphicon glyphicon-lock settingsIcon"></span><span class="dropSettingsText">Password Settings</span></a></li>
+        </ul>
     </div>
 }
 

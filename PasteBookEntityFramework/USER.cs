@@ -50,7 +50,7 @@ namespace PasteBookEntityFramework
 
         [Required]
         [DisplayName("Birthday")]
-        [DisplayFormat(DataFormatString = "{0:MMMM dd, yyyy}")]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public System.DateTime BIRTHDAY { get; set; }
 
         [DisplayName("Country")]

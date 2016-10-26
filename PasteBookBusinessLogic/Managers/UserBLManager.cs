@@ -8,7 +8,6 @@ namespace PasteBookBusinessLogic
     public class UserBLManager
     {
         PBGenericDBManager<USER> userGenericManager = new PBGenericDBManager<USER>();
-
         UserDBManager userManager = new UserDBManager();
 
         public List<REF_COUNTRY> RetrieveCountryList()
@@ -42,9 +41,18 @@ namespace PasteBookBusinessLogic
             return userGenericManager.Add(user);
         }
 
-        public bool EditUser(USER user)
+        public USER UserMapper(USER user)
         {
-            return userGenericManager.Edit(user);
+            USER currentUser = userManager.RetrieveSpecificUser(user.ID);
+
+            user.ABOUT_ME = currentUser.ABOUT_ME;
+            user.DATE_CREATED = currentUser.DATE_CREATED;
+            user.EMAIL_ADDRESS = currentUser.EMAIL_ADDRESS;
+            user.PASSWORD = currentUser.PASSWORD;
+            user.PROFILE_PIC = currentUser.PROFILE_PIC;
+            user.SALT = currentUser.SALT;
+
+            return user;
         }
 
         public USER LoginUser(USER user)
@@ -72,6 +80,40 @@ namespace PasteBookBusinessLogic
             {
                 return null;
             }
+        }
+
+        public bool EditPassword(USER user, string newPassword)
+        {
+            USER currentUser = userManager.RetrieveSpecificUser(user.ID);
+
+            if(IsPasswordMatch(user.PASSWORD, currentUser.SALT, currentUser.PASSWORD))
+            {
+                string salt = null;
+                string hash = GeneratePasswordHash(newPassword, out salt);
+                currentUser.PASSWORD = hash;
+                currentUser.SALT = salt;
+                return EditUser(currentUser);
+            }
+
+            return false;
+        }
+
+        public bool EditEmail(USER user, string newEmail)
+        {
+            USER currentUser = userManager.RetrieveSpecificUser(user.ID);
+
+            if (IsPasswordMatch(user.PASSWORD, currentUser.SALT, currentUser.PASSWORD))
+            {
+                currentUser.EMAIL_ADDRESS = newEmail;
+                return EditUser(currentUser);
+            }
+
+            return false;
+        }
+
+        public bool EditUser(USER user)
+        {
+            return userGenericManager.Edit(user);
         }
 
         public List<USER> SearchUser(string searchString)

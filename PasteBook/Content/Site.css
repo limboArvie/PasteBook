@@ -143,6 +143,8 @@ select
 
 #wellAboutMe{
     background-color: #BBD9F0;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
 }
 
 #wellMenu{
@@ -171,6 +173,7 @@ select
     background-color: #87B5DB;
     width: 70%;
     height: 220px;
+    margin-top: 35px;
 }
 
 #wellPostProfileArea{
@@ -231,6 +234,11 @@ select
     margin-top: 13px;
     margin-left: 10px;
     margin-right: 45px;
+}
+
+#btnLoginNav{
+    margin-top: 13px;
+    margin-left: 10px;
 }
 
 #currentUserArea{
@@ -332,6 +340,8 @@ span.badge{
 .postContent{
     font-size: 20px;
     font-weight: bolder;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
 }
 
 .btnLike{
@@ -382,4 +392,44 @@ ul.dropdown-menu{
 
 div.col-md-4{
     padding-left: 0;
+}
+
+.txtComment{
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+
+#settingsMenu{
+    margin-top: 35px;
+}
+
+#settingsContent{
+    margin-top: 35px;
+}
+
+
+#dropSettings {
+    margin-top: -48px;
+    margin-left: 35px;
+}
+
+.settingsIcon{
+    margin-right: 10px;
+    font-size: 16px;
+}
+
+.dropSettingsText{
+    font-size: 16px;
+}
+
+#headerAboutMe, #headerBasicInfo{
+    font-size: 20px;
+    font-weight: bolder;
+}
+
+.headerSearch{
+    font-size: 30px;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 35px;
 }

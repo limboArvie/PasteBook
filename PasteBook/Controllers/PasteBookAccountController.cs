@@ -8,6 +8,7 @@ namespace PasteBook.Controllers
     public class PasteBookAccountController : Controller
     {
         UserBLManager userManager = new UserBLManager();
+        PasteBookAppBLManager pasteBookManager = new PasteBookAppBLManager();
 
         public ActionResult Index()
         {
@@ -58,8 +59,6 @@ namespace PasteBook.Controllers
         [HttpPost]
         public ActionResult Register(USER user)
         {
-            ViewBag.Country = new SelectList(userManager.RetrieveCountryList(), "ID", "COUNTRY");
-
             if (userManager.CheckUsername(user.USER_NAME))
             {
                 ModelState.AddModelError("USER_NAME", "Username already exists.");
@@ -76,13 +75,95 @@ namespace PasteBook.Controllers
                 return View("Index");
             }
 
+            ViewBag.Country = new SelectList(userManager.RetrieveCountryList(), "ID", "COUNTRY");
             return View("Register");
+        }
+
+        public ActionResult ProfileSettings()
+        {
+            USER currentUser = pasteBookManager.GetUserInfo((int)Session["Userid"]);
+            ViewBag.Country = new SelectList(userManager.RetrieveCountryList(), "ID", "COUNTRY", currentUser.REF_COUNTRY.COUNTRY);
+            return View("ProfileSettings", currentUser);
+        }
+
+        [HttpPost]
+        public ActionResult ProfileSettings(USER user)
+        {
+            USER currentUser = pasteBookManager.GetUserInfo((int)Session["Userid"]);
+            ViewBag.Country = new SelectList(userManager.RetrieveCountryList(), "ID", "COUNTRY", currentUser.REF_COUNTRY.COUNTRY);
+            user = userManager.UserMapper(user);
+            bool result = userManager.EditUser(user);
+            if (result)
+            {
+                Session["User"] = user.USER_NAME;
+            }
+            return View("ProfileSettings", user);
+        }
+
+        public ActionResult EmailSettings()
+        {
+            USER currentUser = pasteBookManager.GetUserInfo((int)Session["Userid"]);
+            currentUser.PASSWORD = "";
+            return View("EmailSettings", currentUser);
+        }
+
+        [HttpPost]
+        public ActionResult EmailSettings(USER user, string newEmail)
+        {
+            bool result = false;
+            if (userManager.CheckEmail(newEmail))
+            {
+                ModelState.AddModelError("newEmail", "Email already exists.");
+            }
+
+            else
+            {
+                result = userManager.EditEmail(user, newEmail);
+            }
+
+            if (result == false)
+            {
+                ModelState.AddModelError("PASSWORD", "Incorrect password.");
+            }
+
+            user = pasteBookManager.GetUserInfo(user.ID);
+            user.PASSWORD = "";
+
+            return View("EmailSettings", user);
+        }
+
+        public ActionResult PasswordSettings()
+        {
+            USER currentUser = pasteBookManager.GetUserInfo((int)Session["Userid"]);
+            currentUser.PASSWORD = "";
+            return View("PasswordSettings", currentUser);
+        }
+
+        [HttpPost]
+        public ActionResult PasswordSettings(USER user, string newPassword, string reTypePassword)
+        {
+            USER currentUser = pasteBookManager.GetUserInfo(user.ID);
+
+            if (newPassword != reTypePassword)
+            {
+                ModelState.AddModelError("reTypePassword", "Password must match.");
+                return View("PasswordSettings", user);
+            }
+
+            if(userManager.EditPassword(user, newPassword) == false)
+            {
+                ModelState.AddModelError("PASSWORD", "Incorrect password.");
+            }
+
+            user = pasteBookManager.GetUserInfo(user.ID);
+            user.PASSWORD = "";
+            
+            return View("PasswordSettings", user);
         }
 
         public ActionResult Logout()
         {
-            Session["User"] = null;
-            Session["Userid"] = null;
+            Session.Clear();
             return View("Index");
         }
     }

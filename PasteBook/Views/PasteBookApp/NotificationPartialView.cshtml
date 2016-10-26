@@ -7,7 +7,7 @@
         @{
             if (@Model.ListOfNotif.Count != 0)
             {
-                <span class="badge">@Model.ListOfNotif.Count()</span> 
+                <span class="badge">@Model.ListOfNotif.Where(x=>x.SEEN == "N").Count()</span> 
             } 
         }
         </a>

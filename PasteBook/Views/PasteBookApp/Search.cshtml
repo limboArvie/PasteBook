@@ -10,17 +10,18 @@
 }
 
 <div>
-    <h1>Search Results</h1>
+    
     @{
         if(Model.UserList.Count() == 0)
         {
-            <p>No results found for "@Model.SearchKey"</p>
+            <p class="headerSearch">No results found for " @Model.SearchKey "</p>
         }
 
         else
         {
-           <p> Results for @Model.SearchKey </p>
+           <p class="headerSearch"> Results for " @Model.SearchKey " </p>
         }
+
         foreach (var item in Model.UserList)
         {
             <div id="friendBanner" class="well well-lg col-md-12">
