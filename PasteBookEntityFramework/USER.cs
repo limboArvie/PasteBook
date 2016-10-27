@@ -31,21 +31,28 @@ namespace PasteBookEntityFramework
 
         [Required]
         [DisplayName("Username")]
+        [MaxLength(50, ErrorMessage = "Username is too long. Maximum length is 50.")]
+        //[RegularExpression("/^[A-Za-z0-9][A-Za-z0-9_. ]+$/", ErrorMessage = "Invalid Username format. Only Alphanumeric characters(A-Za-z0-9), period(.) and underscore(_) are allowed.")]
         public string USER_NAME { get; set; }
 
         [Required]
         [DisplayName("Password")]
         [DataType(DataType.Password)]
+        [MaxLength(50, ErrorMessage = "Password is too long. Maximum length is 50.")]
         public string PASSWORD { get; set; }
 
         public string SALT { get; set; }
 
         [Required]
         [DisplayName("First Name")]
+        [MaxLength(50, ErrorMessage = "First name is too long. Maximum length is 50.")]
+        //[RegularExpression("/^[A-Za-z0-9][A-Za-z0-9.' ]+/", ErrorMessage = "First name cannot contain special characters. Only alphanumeric characters(A-Za-z0-9), dash(-), period(.) and apostrophe(') are allowed.")]
         public string FIRST_NAME { get; set; }
 
         [Required]
         [DisplayName("Last Name")]
+        [MaxLength(50, ErrorMessage = "Last name is too long. Maximum length is 50.")]
+        //[RegularExpression("/^[A-Za-z0-9][A-Za-z0-9.' ]+/", ErrorMessage = "Last name cannot contain special characters and must start with alphanumeric characters. Only alphanumeric characters(A-Za-z0-9), dash(-) and apostrophe(') are allowed.")]
         public string LAST_NAME { get; set; }
 
         [Required]
@@ -59,6 +66,7 @@ namespace PasteBookEntityFramework
         [DisplayName("Mobile Number")]
         [DataType(DataType.PhoneNumber)]
         [Phone]
+        [MaxLength(50, ErrorMessage = "Mobile number is too long. Maximum length is 50")]
         public string MOBILE_NO { get; set; }
 
         [DisplayName("Gender")]
@@ -71,12 +79,14 @@ namespace PasteBookEntityFramework
         public System.DateTime DATE_CREATED { get; set; }
 
         [DisplayName("About Me")]
+        [MaxLength(2000, ErrorMessage = "About me is too long. Maximum length is 2000")]
         public string ABOUT_ME { get; set; }
 
         [Required]
         [DisplayName("Email Address")]
         [DataType(DataType.EmailAddress)]
         [EmailAddress]
+        [MaxLength(50, ErrorMessage = "Email address is too long. Maximum length is 50")]
         public string EMAIL_ADDRESS { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

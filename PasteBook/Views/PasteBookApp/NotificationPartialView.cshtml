@@ -1,47 +1,31 @@
 ﻿@model PasteBook.Models.PasteBookViewModel
 
 
-    <div class="btn-group pull-right groupNotif">
-        <a href="#" class="btn btn-primary dropdown-toggle btnNotif" data-toggle="dropdown" aria-expanded="false" title="Notifications">
-        <span class="glyphicon glyphicon-bell"></span>
-        @{
-            if (@Model.ListOfNotif.Count != 0)
-            {
-                <span class="badge">@Model.ListOfNotif.Where(x=>x.SEEN == "N").Count()</span> 
-            } 
+    @{
+        if (Model.ListOfNotif.Count() == 0)
+        {
+            <li>No new notification.</li>
         }
-        </a>
 
-        @*<a href="#" class="btn btn-primary dropdown-toggle btnNotif" data-toggle="dropdown" aria-expanded="false"><span class="caret"></span></a>*@
-        <ul class="dropdown-menu">
-            @{
-                if(Model.ListOfNotif.Count() == 0)
-                {
-                    <li>No new notification.</li>
-                }
-
-                foreach (var item in Model.ListOfNotif)
-                {
-                    if (@item.NOTIF_TYPE == "L")
-                    {
-                        <li><a href="#">@item.USER1.FIRST_NAME @item.USER1.LAST_NAME liked one of your posts.</a></li>
-                    }
-
-                    else if (@item.NOTIF_TYPE == "C")
-                    {
-                        <li><a href="#">@item.USER1.FIRST_NAME @item.USER1.LAST_NAME commented on one of your posts.</a></li>
-                    }
-
-                    else
-                    {
-                        <li><a href="#">@item.USER1.FIRST_NAME @item.USER1.LAST_NAME sent you a friend request.</a></li>
-                    }
-
-                }
+        foreach (var item in Model.ListOfNotif)
+        {
+            if (@item.NOTIF_TYPE == "L")
+            {
+                <li><a href="@Url.Action("ViewPost", "PasteBookApp", new { postID = @item.POST_ID})"><span class="glyphicon glyphicon-star notifStarSM"></span>@item.USER1.FIRST_NAME @item.USER1.LAST_NAME liked one of your posts.</a></li>
             }
-            
-            <li class="divider"></li>
-            <li><a href="#">Clear all notifications</a></li>
-        </ul>
-    </div>
+
+            else if (@item.NOTIF_TYPE == "C")
+            {
+                <li><a href="@Url.Action("ViewPost", "PasteBookApp", new { postID = @item.POST_ID})"><span class="glyphicon glyphicon-comment notifCommentSM"></span>@item.USER1.FIRST_NAME @item.USER1.LAST_NAME commented on one of your posts.</a></li>
+            }
+
+            else
+            {
+                <li><a href="@Url.Action("Friends", "PasteBookApp")"><span class="glyphicon glyphicon-user notifFriendSM"></span>@item.USER1.FIRST_NAME @item.USER1.LAST_NAME sent you a friend request.</a></li>
+            }
+
+        }
+    }
+
+    
 

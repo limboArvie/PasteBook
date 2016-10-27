@@ -16,7 +16,7 @@
             },
 
             error: function () {
-                alert('Something went wrong')
+                window.location.href = errorPageUrl;
             }
         })
     });
@@ -37,7 +37,7 @@
             data: data,
             type: 'POST',
             success: function (data) {
-                if (currentLocation.pathname == "/PasteBookApp/friends" || currentLocation.pathname == "/PasteBookApp/Friends") {
+                if (currentLocation.pathname == "/pastebook.com/friends" || currentLocation.pathname == "/pastebook.com/Friends") {
                     FriendAcceptedSuccessFPage(data)
                 }
 
@@ -48,7 +48,7 @@
             },
 
             error: function () {
-                alert('Something went wrong')
+                window.location.href = errorPageUrl;
             }
         })
 
@@ -70,7 +70,7 @@
             data: data,
             type: 'POST',
             success: function (data) {
-                if (currentLocation.pathname == "/PasteBookApp/friends" || currentLocation.pathname == "/PasteBookApp/Friends") {
+                if (currentLocation.pathname == "/pastebook.com/friends" || currentLocation.pathname == "/pastebook.com/Friends") {
                     FriendIgnoredSuccessFPage(data)
                 }
 
@@ -80,7 +80,7 @@
             },
 
             error: function () {
-                alert('Something went wrong')
+                window.location.href = errorPageUrl;
             }
         })
 

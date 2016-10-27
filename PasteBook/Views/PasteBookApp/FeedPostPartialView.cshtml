@@ -4,7 +4,7 @@
     @{
         foreach (var item in Model.ListOfPost)
         {
-            <div id="wellPostFeed" class="well well-lg">
+            <div id="wellPostFeed" class="well well-lg col-md-offset-1">
                 @{
                     if (item.LIKEs.Any(x => x.LIKED_BY == (int)Session["Userid"]))
                     {
@@ -29,7 +29,7 @@
                     }
                 }
                 <p>@item.CREATED_DATE.ToString("dddd, MMMM dd, yyyy HH:mm:ss tt")</p>
-                
+
                 <p class="postContent">@item.CONTENT</p>
 
                 <button class="btn btn-success glyphicon glyphicon-star" data-toggle="modal" data-target=".@item.ID" title="@item.LIKEs.Count() liked this post">@item.LIKEs.Count()</button>
@@ -65,24 +65,22 @@
 
                     </div>
                 </div>
-
-                <button class="btn btn-success glyphicon glyphicon-comment" title="@item.COMMENTs.Count() comment(s) for this post">@item.COMMENTs.Count()</button>
+                <button id="btnViewPost" class="btn btn-success glyphicon glyphicon-eye-open" title="View Post" onclick="location.href='@Url.Action("ViewPost", "PasteBookApp", new { postID = @item.ID})'"></button>
                 <br />
-               
-                    @Html.TextArea("CommentFeed", new { @class = "txtAreaComment", id=@item.ID, placeholder = "Paste your comment..."})
-                    <button class="btnComment btn btn-primary" value="@item.ID">Comment</button>
+
+                @Html.TextArea("CommentFeed", new { @class = "txtAreaComment", id = @item.ID, placeholder = "Paste your comment..." })
+                <button class="btnComment btn btn-primary" value="@item.ID">Comment</button>
 
                 @{
                     foreach (var comment in item.COMMENTs)
                     {
                         <a class="txtCommentor" href="@Url.Action("UserProfile", "PasteBookApp", new { userID = @comment.USER.USER_NAME })">@comment.USER.FIRST_NAME @comment.USER.LAST_NAME</a>
-                            <p class="txtComment">@comment.CONTENT</p>
+                        <p class="txtComment">@comment.CONTENT</p>
                     }
                 }
 
             </div>
-        }
+                    }
     }
 
 </div>
-

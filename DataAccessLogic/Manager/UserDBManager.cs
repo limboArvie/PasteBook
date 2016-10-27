@@ -113,8 +113,7 @@ namespace PasteBookDataAccessLogic
             {
                 using (var context = new PASTEBOOKEntities())
                 {
-                    return context.USERs.Include("REF_COUNTRY").Where(x => x.FIRST_NAME == searchString || x.LAST_NAME == searchString).ToList();
-                    //return context.USERs.Include("REF_COUNTRY").Where(x => x.FIRST_NAME.Contains(searchString) || x.LAST_NAME.Contains(searchString)).ToList();
+                    return context.USERs.Include("REF_COUNTRY").Where(x => x.FIRST_NAME == searchString || x.LAST_NAME == searchString || (x.FIRST_NAME + " " + x.LAST_NAME) == searchString).ToList();
                 }
             }
             catch (Exception ex)

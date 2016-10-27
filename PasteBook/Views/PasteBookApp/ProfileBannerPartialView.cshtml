@@ -30,7 +30,7 @@
                 <button class="btnIgnoreRequest btn btn-danger col-md-3" value=@Model.User.ID>Ignore Request</button>
         }
 
-        else if (Model.ListOfFriend.Any(x => x.FRIEND_ID != (int)Session["CurrentProfile"]) && (string)Session["User"] != Model.User.USER_NAME || Model.ListOfFriend.Count() == 0)
+        else if (Model.ListOfFriend.Any(x => x.FRIEND_ID != (int)Session["CurrentProfile"]) && (string)Session["User"] != Model.User.USER_NAME || (Model.ListOfFriend.Count() == 0 && (string)Session["User"] != Model.User.USER_NAME))
         {
             <button id="btnAddFriend" class="btn btn-primary col-md-3">Add Friend</button>
         }

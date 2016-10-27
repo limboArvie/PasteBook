@@ -15,6 +15,7 @@ namespace PasteBook.Controllers
         PasteBookAppBLManager appManager = new PasteBookAppBLManager();
         UserBLManager userManager = new UserBLManager();
 
+        [Route("")]
         public ActionResult Index()
         {
             if(Session["Userid"] == null)
@@ -36,8 +37,14 @@ namespace PasteBook.Controllers
             return PartialView("FeedPostPartialView", pasteBook);
         }
 
+        [Route("{userID:minlength(1)}")]
         public ActionResult UserProfile(string userID)
         {
+            if (Session["Userid"] == null)
+            {
+                return RedirectToAction("Login", "PasteBookAccount");
+            }
+
             USER currentUser = new USER();
             currentUser = appManager.GetUserInfo(userID);
             Session["CurrentProfile"] = currentUser.ID;
@@ -77,8 +84,14 @@ namespace PasteBook.Controllers
         }
 
         [ActionName("friends")]
+        [Route("friends")]
         public ActionResult Friends()
         {
+            if (Session["Userid"] == null)
+            {
+                return RedirectToAction("Login", "PasteBookAccount");
+            }
+
             List<FRIEND> friendList = new List<FRIEND>();
             List<USER> friendsInfo = new List<USER>();
             FriendsViewModel friendsModel = new FriendsViewModel();
@@ -143,6 +156,18 @@ namespace PasteBook.Controllers
             return Json(new { ignoreRequestResult = result }, JsonRequestBehavior.AllowGet);
         }
 
+        [Route("posts/{postID}")]
+        public ActionResult ViewPost(int postID)
+        {
+            if (Session["Userid"] == null)
+            {
+                return RedirectToAction("Login", "PasteBookAccount");
+            }
+
+            POST post = appManager.RetrieveSpecificPost(postID);
+            return View(post);
+        }
+
         public JsonResult Post(POST post)
         {
             int currentProfile = (int)Session["CurrentProfile"];
@@ -156,14 +181,44 @@ namespace PasteBook.Controllers
             return Json(new { likeResult = result }, JsonRequestBehavior.AllowGet);
         }
 
+        [Route("notifications")]
+        public ActionResult Notifications()
+        {
+            if (Session["Userid"] == null)
+            {
+                return RedirectToAction("Login", "PasteBookAccount");
+            }
+
+            List<NOTIFICATION> notifList = appManager.RetrieveNotifications((int)Session["Userid"]);
+            return View(notifList);
+        }
+
+        public JsonResult CountNotifications()
+        {
+            var result = appManager.RetrieveNotifications((int)Session["Userid"]).Where(x => x.SEEN == "N").Count();
+            return Json(new { notifCount = result }, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult ClearNotification()
+        {
+            var result = appManager.ClearNotification((int)Session["Userid"]);
+            return Json(new { clearNotifResult = result }, JsonRequestBehavior.AllowGet);
+        }
+
         public JsonResult Comment(COMMENT comment)
         {
             var result = appManager.Comment(comment);
             return Json(new { likeResult = result }, JsonRequestBehavior.AllowGet);
         }
 
+        [Route("search")]
         public ActionResult Search(string searchString)
         {
+            if (Session["Userid"] == null)
+            {
+                return RedirectToAction("Login", "PasteBookAccount");
+            }
+
             UserViewModel searchFriends = new UserViewModel();
             searchFriends.SearchKey = searchString;
             searchFriends.UserList = userManager.SearchUser(searchString);

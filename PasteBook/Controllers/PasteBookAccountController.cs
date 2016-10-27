@@ -31,7 +31,7 @@ namespace PasteBook.Controllers
 
                 if (currentUser == null)
                 {
-                    ModelState.AddModelError("EMAIL_ADDRESS", "Email Address or Password is Invalid");
+                    ViewBag.ErrorLogin = true;
                     return View("Login");
                 }
 
@@ -50,6 +50,18 @@ namespace PasteBook.Controllers
             
         }
 
+        public JsonResult CheckUsername(string username)
+        {
+            var result = userManager.CheckUsername(username);
+            return Json(new { usernameExist = result }, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult CheckEmail(string email)
+        {
+            var result = userManager.CheckEmail(email);
+            return Json(new { emailExist = result }, JsonRequestBehavior.AllowGet);
+        }
+
         public ActionResult Register()
         {
             ViewBag.Country = new SelectList(userManager.RetrieveCountryList(), "ID", "COUNTRY");
@@ -57,7 +69,7 @@ namespace PasteBook.Controllers
         }
 
         [HttpPost]
-        public ActionResult Register(USER user)
+        public ActionResult Register(USER user, string ConfirmPassword)
         {
             if (userManager.CheckUsername(user.USER_NAME))
             {
@@ -69,10 +81,28 @@ namespace PasteBook.Controllers
                 ModelState.AddModelError("EMAIL_ADDRESS", "Email already been used by another account.");
             }
 
+            if (ConfirmPassword == "")
+            {
+                ModelState.AddModelError("ConfirmPassword", "Confirm password field is required.");
+            }
+
+            else if(user.PASSWORD != ConfirmPassword)
+            {
+                ModelState.AddModelError("ConfirmPassword", "Password must match.");
+            }
+
             if (ModelState.IsValid)
             {
                 bool result = userManager.RegisterUser(user);
-                return View("Index");
+
+                if (result == true)
+                {
+                    Session["User"] = user.USER_NAME;
+                    Session["Userid"] = user.ID;
+                    return RedirectToAction("Index", "PasteBookApp");
+                }
+
+                return View("Register");
             }
 
             ViewBag.Country = new SelectList(userManager.RetrieveCountryList(), "ID", "COUNTRY");
@@ -164,7 +194,7 @@ namespace PasteBook.Controllers
         public ActionResult Logout()
         {
             Session.Clear();
-            return View("Index");
+            return View("Login");
         }
     }
 }

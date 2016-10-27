@@ -1,8 +1,14 @@
 ﻿$(document).ready(function () {
+    var currentLocation = window.location;
+
+    if (currentLocation.pathname == "/pastebook.com" || currentLocation.pathname == "/pastebook.com/") {
+        ReloadFeed()
+        setInterval(ReloadFeed, 60000);
+    }
 
     $('#btnPostFeed').on('click', function () {
         var data = {
-            "CONTENT": $('#txtAreaPostFeed').val(),
+            "CONTENT": $('#txtAreaPostFeed').val()+" ",
             "ID": 0,
             "PROFILE_OWNER_ID": currentUserID,
             "POSTER_ID": currentUserID,
@@ -10,7 +16,7 @@
         }
 
         if (data.Content == '') {
-            //put bootsrap error
+            
         }
 
         else {
@@ -23,7 +29,7 @@
                 },
 
                 error: function () {
-                    alert('Something went wrong')
+                    window.location.href = errorPageUrl;
                 }
             })
         }
@@ -39,7 +45,7 @@
         }
 
         if (data.Content == '') {
-            //put bootsrap error
+            
         }
 
         else {
@@ -52,7 +58,7 @@
                 },
 
                 error: function () {
-                    alert('Something went wrong')
+                    window.location.href = errorPageUrl;
                 }
             })
         }
@@ -73,8 +79,12 @@
             data: data,
             type: 'POST',
             success: function (data) {
-                if (currentLocation.pathname == "/PasteBookApp") {
+                if (currentLocation.pathname == "/pastebook.com" ||currentLocation.pathname == "/pastebook.com/") {
                     LikeFSuccess(data);
+                }
+
+                else if (currentLocation.pathname.match(/^\/pastebook.com\/posts\/(\d+)/)) {
+                    SpecificPostSuccess(data);
                 }
 
                 else {
@@ -84,12 +94,14 @@
             },
                 
             error: function () {
-                alert('Something went wrong')
+                window.location.href = errorPageUrl;
             }
         })
     });
 
     $(document).on('click', '.btnComment', function () {
+
+        var currentLocation = window.location;
 
         var data = {
             "ID": null,
@@ -104,11 +116,17 @@
             data: data,
             type: 'POST',
             success: function (data) {
-                CommentFSuccess(data);
+                if (currentLocation.pathname.match(/^\/pastebook.com\/posts\/(\d+)/)) {
+                    SpecificPostSuccess(data);
+                }
+
+                else {
+                    CommentFSuccess(data);
+                }
             },
 
             error: function () {
-                alert('Something went wrong')
+                window.location.href = errorPageUrl;
             }
         })
     });
@@ -132,11 +150,14 @@
             },
 
             error: function () {
-                alert('Something went wrong')
+                window.location.href = errorPageUrl;
             }
         })
     });
 
+    function ReloadFeed() {
+        $('#divFeedPost').load(renderPostUrl);
+    }
 
     function AddPostFeedSuccess(data) {
         $('#txtAreaPostFeed').val('')
@@ -156,6 +177,10 @@
         $('#divTimeLinePost').load(renderPostTLUrl);
     }
 
+    function SpecificPostSuccess(data) {
+        window.location.href = renderSpecificPost;
+    }
+
     function CommentFSuccess(data) {
         $('#divFeedPost').load(renderPostUrl);
     }
@@ -163,5 +188,6 @@
     function CommentTLSuccess(data) {
         $('#divTimeLinePost').load(renderPostTLUrl);
     }
+
 });
 

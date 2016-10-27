@@ -55,8 +55,8 @@
                 </div>
             </div>
 
-            <button class="btn btn-success glyphicon glyphicon-comment" title="@item.COMMENTs.Count() comment(s) for this post">@item.COMMENTs.Count()</button><br />
-
+            <button id="btnViewPost" class="btn btn-success glyphicon glyphicon-eye-open" title="View Post" onclick="location.href='@Url.Action("ViewPost", "PasteBookApp", new { postID = @item.ID})'"></button>
+            <br />
             @Html.TextArea("CommentTL", new { @class = "txtAreaCommentTL", id = @item.ID, placeholder = "Paste your comment..." })
             <button class="btnCommentTL btn btn-primary" value="@item.ID">Comment</button>
 

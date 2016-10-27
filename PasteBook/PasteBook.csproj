@@ -156,27 +156,22 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\PasteBookAccountController.cs" />
     <Compile Include="Controllers\PasteBookAppController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Managers\PasteBookViewManager.cs" />
-    <Compile Include="Mapper\Mapper.cs" />
-    <Compile Include="Models\CommentModel.cs" />
-    <Compile Include="Models\FriendModel.cs" />
     <Compile Include="Models\FriendsViewModel.cs" />
-    <Compile Include="Models\LikeModel.cs" />
     <Compile Include="Models\PasteBookViewModel.cs" />
-    <Compile Include="Models\PostModel.cs" />
-    <Compile Include="Models\Ref_CountryModel.cs" />
-    <Compile Include="Models\UserModel.cs" />
     <Compile Include="Models\UserViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Images\error404.png" />
+    <Content Include="Content\Images\error500.png" />
     <Content Include="Content\Images\pasteBookDefaultImage.png" />
     <Content Include="Content\Images\pastebookIcon.ico" />
     <Content Include="Content\Images\pastebookLogo.png" />
@@ -191,6 +186,7 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="ClassDiagram1.cd" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -199,9 +195,11 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\pastebookNotification.js" />
     <Content Include="Scripts\pastebookPost.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\pastebookFriend.js" />
+    <Content Include="Scripts\pastebookValidator.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
@@ -231,6 +229,10 @@
     <Content Include="Views\PasteBookAccount\EmailSettings.cshtml" />
     <Content Include="Views\PasteBookAccount\PasswordSettings.cshtml" />
     <Content Include="Views\PasteBookAccount\ProfileSettings.cshtml" />
+    <Content Include="Views\PasteBookApp\ViewPost.cshtml" />
+    <Content Include="Views\PasteBookApp\Notifications.cshtml" />
+    <Content Include="Views\Error\Error404.cshtml" />
+    <Content Include="Views\Error\GlobalError.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

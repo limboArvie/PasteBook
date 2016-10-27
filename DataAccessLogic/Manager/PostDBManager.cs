@@ -93,6 +93,28 @@ namespace PasteBookDataAccessLogic
             }
         }
 
+        public POST RetrievePost(int postID)
+        {
+            try
+            {
+                using (var context = new PASTEBOOKEntities())
+                {
+                    return context.POSTs.Include("USER")
+                                        .Include("USER1")
+                                        .Include("COMMENTs.USER")
+                                        .Include("LIKEs.USER")
+                                        .Where(x => x.ID == postID)
+                                        .SingleOrDefault();
+                }
+            }
+
+            catch (Exception ex)
+            {
+                ErrorList.Add(ex);
+                return null;
+            }
+        }
+
         public List<LIKE> RetrieveLikes()
         {
             try
@@ -141,6 +163,22 @@ namespace PasteBookDataAccessLogic
                 }
             }
 
+            catch (Exception ex)
+            {
+                ErrorList.Add(ex);
+                return null;
+            }
+        }
+
+        public NOTIFICATION RetrieveSpecificLikeNotif(int likerID, int postID)
+        {
+            try
+            {
+                using (var context = new PASTEBOOKEntities())
+                {
+                    return context.NOTIFICATIONs.Where(x => x.POST_ID == postID && x.SENDER_ID == likerID && x.NOTIF_TYPE == "L").SingleOrDefault();
+                }
+            }
             catch (Exception ex)
             {
                 ErrorList.Add(ex);

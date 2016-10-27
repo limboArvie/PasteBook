@@ -78,7 +78,7 @@
             <li><a href="@Url.Action("EmailSettings", "PasteBookAccount")"><span class="glyphicon glyphicon-envelope settingsIcon"></span><span class="dropSettingsText">Email Settings</span></a></li>
             <li><a href="@Url.Action("PasswordSettings", "PasteBookAccount")"><span class="glyphicon glyphicon-lock settingsIcon"></span><span class="dropSettingsText">Password Settings</span></a></li>
         </ul>
-</div>
+    </div>
 
 </div>
 
@@ -147,7 +147,13 @@
                 <div class="col-md-10">
                     <p id="headerAboutMe">ABOUT ME</p>
                 </div>
-                <button class="btn btn-primary col-md-2 pull-right" data-toggle="modal" data-target="#editAboutModel" title="Edit About Me"><span class="glyphicon glyphicon-pencil"></span></button>
+                
+                @{
+                    if (Model.User.USER_NAME == (string)Session["User"])
+                    {
+                        <button class="btn btn-primary col-md-2 pull-right" data-toggle="modal" data-target="#editAboutModel" title="Edit About Me"><span class="glyphicon glyphicon-pencil"></span></button>
+                    }
+                }
 
                 <!-- Modal for Edit About Me-->
                 <div id="editAboutModel" class="modal fade" role="dialog">
@@ -179,7 +185,18 @@
             <br />
             <div class="row">
                 <div class="col-md-12">
-                    @Html.DisplayFor(model => model.User.ABOUT_ME)
+                    @{ 
+                        if(Model.User.ABOUT_ME == null)
+                        {
+                            <p>The user has not paste anything here yet.</p>
+                        }
+
+                        else
+                        {
+                            @Html.DisplayFor(model => model.User.ABOUT_ME)
+                        }
+                    }
+
                 </div>
             </div>
             <br />
@@ -194,7 +211,7 @@
         </div>
     </div>
     @{
-        if (Model.ListOfFriend.Any(x => (x.FRIEND_ID == (int)Session["CurrentProfile"] || x.USER_ID == (int)Session["CurrentProfile"]) && x.REQUEST == "Y"))
+        if ((Model.ListOfFriend.Any(x => (x.FRIEND_ID == (int)Session["CurrentProfile"] || x.USER_ID == (int)Session["CurrentProfile"]) && x.REQUEST == "Y"))|| Model.User.USER_NAME == (string)Session["User"])
         {
             <div class="col-md-6">
                 <div id="wellPostProfileArea" class="well well-lg">

@@ -1,0 +1,42 @@
+﻿@model IEnumerable<PasteBookEntityFramework.NOTIFICATION>
+
+@{
+    ViewBag.Title = "Notifications";
+}
+
+
+<p id="headerNotif" class="col-md-offset-1">Notifications</p>
+<div id="notifArea" class="col-md-offset-1">
+    @foreach (var item in Model)
+    {
+        if (@item.NOTIF_TYPE == "L")
+        {
+            <div class="well well-sm wellNotif">
+                <span class="glyphicon glyphicon-star notifStar"></span>
+                <a href="@Url.Action("ViewPost", "PasteBookApp", new { postID = @item.POST_ID})">@item.USER1.FIRST_NAME @item.USER1.LAST_NAME liked one of your posts.</a>
+                <p>@item.CREATED_DATE.ToString("dddd, MMMM dd, yyyy HH:mm:ss tt")</p>
+            </div>
+
+        }
+
+        else if (@item.NOTIF_TYPE == "C")
+        {
+            <div class="well well-sm wellNotif">
+                <span class="glyphicon glyphicon-comment notifComment"></span>
+                <a href="@Url.Action("ViewPost", "PasteBookApp", new { postID = @item.POST_ID})">@item.USER1.FIRST_NAME @item.USER1.LAST_NAME commented on one of your posts.</a>
+                <p>@item.CREATED_DATE.ToString("dddd, MMMM dd, yyyy HH:mm:ss tt")</p>
+            </div>
+        }
+
+        else
+        {
+            <div class="well well-sm wellNotif">
+                <span class="glyphicon glyphicon-user notifFriend"></span>
+                <a href="@Url.Action("Friends", "PasteBookApp")">@item.USER1.FIRST_NAME @item.USER1.LAST_NAME sent you a friend request.</a>
+                <p>@item.CREATED_DATE.ToString("dddd, MMMM dd, yyyy HH:mm:ss tt")</p>
+            </div>
+        }
+        
+    }
+
+</div>

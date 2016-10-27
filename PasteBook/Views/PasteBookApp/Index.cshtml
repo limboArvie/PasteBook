@@ -10,7 +10,7 @@
 }
 
 @{
-    <div id="wellPostAreaFeed" class="well well-lg">
+    <div id="wellPostAreaFeed" class="well well-lg col-md-offset-1">
         <p id="txtPost"><span class="glyphicon glyphicon-pushpin"></span>Paste Something</p>
         @Html.TextAreaFor(model => model.Post.CONTENT, new { id = "txtAreaPostFeed", placeholder="Paste something on your wall..."})
         <button id="btnPostFeed" class="btn btn-primary btn-lg pull-right">Paste</button>

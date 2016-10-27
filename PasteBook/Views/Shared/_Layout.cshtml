@@ -42,7 +42,18 @@
                     {
                         <ul id="homeNavLinks" class="nav navbar-nav navbar-static-top">
                             <li><button id="btnHome" class="btn btn-primary pull-right" onclick="location.href='@Url.Action("Index", "PasteBookApp")'" title="Home"><span class="glyphicon glyphicon-home pull-left"></span></button></li>
-                            <li>@{Html.RenderAction("NotificationPartialView", "PasteBookApp");}<li>
+                            <li><div class="btn-group pull-right groupNotif">
+                                <a href="#" id="notifButton" class="btn btn-primary dropdown-toggle btnNotif" data-toggle="dropdown" aria-expanded="false" title="Notifications">
+                                    <span class="glyphicon glyphicon-bell"></span>
+                                    <span id="notifBadge" class="badge"></span>
+                                </a>
+                                    <ul id="divNotifArea" class="dropdown-menu">
+                                        @{Html.RenderAction("NotificationPartialView", "PasteBookApp");}
+                                        <li class="divider"></li>
+                                        <li><a href="@Url.Action("Notifications", "PasteBookApp")">See all notifications</a></li>
+                                    </ul>
+                                </div>
+                            <li>
                             <li><button id="btnProfile" class="btn btn-primary pull-right" onclick="location.href='@Url.Action("UserProfile", "PasteBookApp", new { userID = Session["User"] })'" title="Profile"><span class="glyphicon glyphicon-user"></span><span id="txtButtonUser">@Session["User"]</span></button></li>
                         </ul>
 
@@ -71,6 +82,14 @@
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
+    <script>
+        var notifCountUrl = '@Url.Action("CountNotifications", "PasteBookApp")';
+        var renderNotifUrl = '@Url.Action("NotificationPartialView", "PasteBookApp")';
+        var notifSeenUrl = '@Url.Action("ClearNotification", "PasteBookApp")';
+        var currentUser = @Session["Userid"];
+        var errorPageUrl = '@Url.Action("GlobalError", "Error")';
+    </script>
+    <script src="~/Scripts/pastebookNotification.js"></script>
     @RenderSection("scripts", required: false)
 </body>
 </html>

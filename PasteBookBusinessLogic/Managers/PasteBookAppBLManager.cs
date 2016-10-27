@@ -68,6 +68,11 @@ namespace PasteBookBusinessLogic
         {
             return postManager.RetrieveTimeLinePosts(id);
         }
+        
+        public POST RetrieveSpecificPost(int id)
+        {
+            return postManager.RetrievePost(id);
+        }
 
         public List<FRIEND> RetrieveFriends(int id)
         {
@@ -163,6 +168,8 @@ namespace PasteBookBusinessLogic
 
             if (likeResult != null)
             {
+                NOTIFICATION likeNotif = postManager.RetrieveSpecificLikeNotif(likeResult.LIKED_BY, likeResult.POST_ID);
+                notifGenericManager.Delete(likeNotif);
                 return likeGenericManager.Delete(likeResult);
             }
 
@@ -223,6 +230,24 @@ namespace PasteBookBusinessLogic
             }
             
             return result;
+        }
+
+        public bool ClearNotification(int userID)
+        {
+            List<NOTIFICATION> unseenNotifList = RetrieveNotifications(userID).Where(x => x.SEEN == "N").ToList();
+
+            foreach (var item in unseenNotifList)
+            {
+                item.SEEN = "Y";
+                var result = notifGenericManager.Edit(item);
+
+                if (result == false)
+                {
+                    return false;
+                }
+            }
+
+            return true;
         }
 
         public List<NOTIFICATION> RetrieveNotifications(int currentUserID)

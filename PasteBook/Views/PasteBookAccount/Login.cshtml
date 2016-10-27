@@ -9,6 +9,15 @@
     <div id ="loginPanel" class="panel panel-primary col-md-offset-3">
         <div class="panel-heading"><img src="~/Content/Images/pastebookIcon.ico">PasteBook Credentials</div>
         <div id="bodyLogin" class="panel-body">
+            @{
+                if (ViewBag.ErrorLogin != null)
+                {
+                    <div id="errorLogin" class="alert alert-danger">
+                        <strong>Invalid email address or password</strong>.
+                    </div>
+                }
+            }
+            
             <div class="row formField">
                 <div class="form-group">
                     @Html.LabelFor(model => model.EMAIL_ADDRESS, htmlAttributes: new { @class = "control-label col-md-4" })
@@ -43,6 +52,12 @@
 
 @section Scripts{
     @Scripts.Render("~/bundles/jqueryval")
+
+    <script>
+        $("#errorLogin").fadeTo(5000, 4000).fadeOut(1000, function () {
+            $("#errorLogin").alert('close');
+        });
+    </script>
 }
 
 

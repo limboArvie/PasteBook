@@ -24,204 +24,15 @@ select
 }
 
 
-/**********************************************************************/
-#imgLogo{
-    padding-top: 10px;
-    padding-bottom: 10px;
-    height: 60px;
-}
-
+/*********Navigation Bar**********/
 .navbar{
     background-color: #023A50;
 }
 
-#loginPanel, #registerPanel{
-    margin-top: 35px;
-    margin-bottom: 50px;
-}
-
-#loginPanel{
-    width: 530px;
-}
-
-#registerPanel{
-    width: 600px;
-}
-
-.panel-primary > .panel-heading{
-    background-color: #0079CF;
-    font-size: 25px;
-}
-
-#bodyRegister{
-    padding-left: 40px;
-}
-
-#bodyLogin{
-    padding-left: 30px;
-}
-
-.formField{
-    padding: 7px;
-}
-
-#btnLogin, #btnRegister, #btnAddFriend{
-    background-color: #0079CF;
-}
-
-#btnLogin {
-    width: 200px;
-}
-
-#btnRegister {
-    width: 300px;
-}
-
-#btnAddFriend{
-    margin-left: 20px;
-    width: 300px;
-}
-
-#imgRegister{
-    height: 500px;
-    background-color: #0079CF;
-    margin-top: 35px;
-}
-
-#profileBanner{
-    width: 80%;
-    height: 244px;
-    margin-top: 35px;
-    background-color: #BBD9F0;
-}
-
-#friendBanner{
-    height: 244px;
-    margin-top: 35px;
-    background-color: #BBD9F0;
-}
-
-#imgProfile{
-    height: 170px;
-    width: 170px;
-    margin-left: 40px;
-}
-
-#btnEditPicture{
-    margin-left: 50px;
-    margin-top: 5px;
-    width: 150px;
-    height: 30px;
-}
-
-#txtfullName{
-    font-size: 50px;
-    padding-left: 50px;
-}
-
-#txtuserName{
-    font-size: large;
-    font-style: italic;
-    padding-left: 20px;
-}
-
-#txtEmail{
-    padding-left: 20px;
-    padding-bottom: 20px;
-    font-size: 30px;
-    color: #023A50;
-}
-
-
-#wellBasicInfo, #wellAboutMe{
-    width: 400px;
-}
-
-#wellBasicInfo{
-    background-color: #BBD9F0;
-}
-
-#wellAboutMe{
-    background-color: #BBD9F0;
-    word-wrap: break-word;
-    overflow-wrap: break-word;
-}
-
-#wellMenu{
-    width: 18%;
-    height: 244px;
-    margin-top: 35px;
-    background-color: #D4E1EE;
-    margin-left: 15px;
-}
-
-#wellMenuFeed{
-    width: 18%;
-    height: 244px;
-    margin-top: -242px;
-    background-color: #D4E1EE;
-    float: right;
-}
-
-#wellPostArea{
-    background-color: #87B5DB;
-    width: 70%;
-    height: 220px;
-}
-
-#wellPostAreaFeed{
-    background-color: #87B5DB;
-    width: 70%;
-    height: 220px;
-    margin-top: 35px;
-}
-
-#wellPostProfileArea{
-    background-color: #699CCE;
-    width: 742px;
-    height: 220px;
-    margin-left: 15px;
-}
-
-#txtAreaPostFeed, #txtAreaPostTimeLine{
-    width: 100%;
-    height: 100px;
-    resize: none;
-}
-
-#wellPostFeed{
-    background-color: #E6F3F6;
-    width: 70%;
-}
-
-#btnPostFeed, #btnPostTimeLine{
-    width: 150px;
-    margin-top: 10px;
-    background-color: #0079CF;
-}
-
-#txtPost{
-    font-weight: bolder;
-}
-
-#wellPostTimeline{
-    background-color: #E6F3F6;
-    width: 742px;
-    margin-left: 15px;
-}
-
-
-.btnMenu{
-    width: 140px;
+#imgLogo{
+    padding-top: 10px;
+    padding-bottom: 10px;
     height: 60px;
-    margin-top: 20px;
-    margin-bottom: 7px;
-    margin-left: 10px;
-    text-align: left;
-}
-
-.iconMenu{
-    margin-right: 5px;
 }
 
 #searchBar{
@@ -257,12 +68,6 @@ select
 
 #homeNavLinks{
     margin-left: 50px;
-}
-
-
-.btnViewProfile{
-    width: 200px;
-    margin-left: 20px;
 }
 
 span.badge{
@@ -323,6 +128,237 @@ span.badge{
 
 #txtButtonUser{
     vertical-align: middle;
+}
+
+
+/**********Register and Login Panel**********/
+#loginPanel, #registerPanel{
+    margin-top: 35px;
+    margin-bottom: 50px;
+}
+
+#loginPanel{
+    width: 530px;
+}
+
+#registerPanel{
+    width: 600px;
+}
+
+.panel-primary > .panel-heading{
+    background-color: #0079CF;
+    font-size: 25px;
+}
+
+#bodyRegister{
+    padding-left: 40px;
+}
+
+#bodyLogin{
+    padding-left: 30px;
+}
+
+.formField{
+    padding: 7px;
+}
+
+#btnLogin, #btnRegister{
+    background-color: #0079CF;
+}
+
+#btnLogin {
+    width: 200px;
+}
+
+#btnRegister {
+    width: 300px;
+}
+
+#imgRegister{
+    height: 500px;
+    background-color: #0079CF;
+    margin-top: 35px;
+}
+
+
+#btnAddFriend{
+    background-color: #0079CF;
+    margin-left: 20px;
+    width: 300px;
+}
+
+
+/**********Profile Banner**********/
+#profileBanner{
+    width: 80%;
+    height: 244px;
+    margin-top: 35px;
+    background-color: #BBD9F0;
+}
+
+#friendBanner{
+    height: 244px;
+    margin-top: 35px;
+    background-color: #BBD9F0;
+}
+
+#imgProfile{
+    height: 170px;
+    width: 170px;
+    margin-left: 40px;
+}
+
+#btnEditPicture{
+    margin-left: 50px;
+    margin-top: 5px;
+    width: 150px;
+    height: 30px;
+}
+
+#txtfullName{
+    font-size: 50px;
+    padding-left: 50px;
+}
+
+#txtuserName{
+    font-size: large;
+    font-style: italic;
+    padding-left: 20px;
+}
+
+#txtEmail{
+    padding-left: 20px;
+    padding-bottom: 20px;
+    font-size: 30px;
+    color: #023A50;
+    text-decoration: none;
+    pointer-events: none;
+}
+
+txtEmail{
+    pointer-events: none;
+}
+
+
+/******** Basic Information and About Me************/
+#wellBasicInfo, #wellAboutMe{
+    width: 400px;
+}
+
+#wellBasicInfo{
+    background-color: #BBD9F0;
+}
+
+#wellAboutMe{
+    background-color: #BBD9F0;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+
+#headerAboutMe, #headerBasicInfo{
+    font-size: 20px;
+    font-weight: bolder;
+}
+
+/**********Menu Navigation**********/
+#wellMenu{
+    width: 18%;
+    height: 244px;
+    margin-top: 35px;
+    background-color: #D4E1EE;
+    margin-left: 15px;
+}
+
+#wellMenuFeed{
+    width: 18%;
+    height: 244px;
+    margin-top: -242px;
+    background-color: #D4E1EE;
+    float: right;
+}
+
+.btnMenu{
+    width: 140px;
+    height: 60px;
+    margin-top: 20px;
+    margin-bottom: 7px;
+    margin-left: 10px;
+    text-align: left;
+}
+
+.iconMenu{
+    margin-right: 5px;
+}
+
+#settingsMenu{
+    margin-top: 35px;
+}
+
+#settingsContent{
+    margin-top: 35px;
+}
+
+#dropSettings {
+    margin-top: -48px;
+    margin-left: 35px;
+}
+
+.settingsIcon{
+    margin-right: 10px;
+    font-size: 16px;
+}
+
+.dropSettingsText{
+    font-size: 16px;
+}
+
+
+/**********Post Area**********/
+#wellPostArea{
+    background-color: #87B5DB;
+    width: 70%;
+    height: 220px;
+}
+
+#wellPostAreaFeed{
+    background-color: #87B5DB;
+    width: 70%;
+    height: 220px;
+    margin-top: 35px;
+}
+
+#wellPostProfileArea{
+    background-color: #699CCE;
+    width: 742px;
+    height: 220px;
+    margin-left: 15px;
+}
+
+#txtAreaPostFeed, #txtAreaPostTimeLine{
+    width: 100%;
+    height: 100px;
+    resize: none;
+}
+
+#wellPostFeed{
+    background-color: #E6F3F6;
+    width: 70%;
+}
+
+#btnPostFeed, #btnPostTimeLine{
+    width: 150px;
+    margin-top: 10px;
+    background-color: #0079CF;
+}
+
+#txtPost{
+    font-weight: bolder;
+}
+
+#wellPostTimeline{
+    background-color: #E6F3F6;
+    width: 742px;
+    margin-left: 15px;
 }
 
 .glyphicon-arrow-right{
@@ -399,32 +435,9 @@ div.col-md-4{
     overflow-wrap: break-word;
 }
 
-#settingsMenu{
-    margin-top: 35px;
-}
-
-#settingsContent{
-    margin-top: 35px;
-}
-
-
-#dropSettings {
-    margin-top: -48px;
-    margin-left: 35px;
-}
-
-.settingsIcon{
-    margin-right: 10px;
-    font-size: 16px;
-}
-
-.dropSettingsText{
-    font-size: 16px;
-}
-
-#headerAboutMe, #headerBasicInfo{
-    font-size: 20px;
-    font-weight: bolder;
+.btnViewProfile{
+    width: 200px;
+    margin-left: 20px;
 }
 
 .headerSearch{
@@ -433,3 +446,47 @@ div.col-md-4{
     text-align: center;
     margin-top: 35px;
 }
+
+#btnViewPost{
+    word-spacing: 0px;
+}
+
+#wellSpecificPost{
+    margin-top: 35px;
+}
+
+/**********Notifications**********/
+.wellNotif{
+    width: 75%;
+}
+
+#headerNotif{
+    font-size: 30px;
+    font-weight: bolder;
+    margin-top: 35px;
+}
+.notifStar, .notifComment, .notifFriend{
+    font-size: 30px;
+    float:left;
+    margin-right: 10px;
+}
+
+.notifStarSM, .notifCommentSM, .notifFriendSM{
+    font-size: 20px;
+    float:left;
+    margin-right: 10px;
+}
+
+.notifStar, .notifStarSM{
+    color: #fce800;
+}
+
+.notifComment, .notifCommentSM{
+    color: #00ff21;
+}
+
+.notifFriend, .notifFriendSM{
+    color: #0079CF;
+}
+
+
