@@ -162,7 +162,24 @@ span.badge{
     padding: 7px;
 }
 
-#btnLogin, #btnRegister{
+#btnLogin, 
+#btnRegister, 
+#btnLogout, 
+#btnHome, 
+#btnSearch, 
+#btnEditPicture, 
+#btnLoginNav, 
+#btnPostFeed, 
+#btnPostTimeLine,
+#btnProfile,
+#headerAboutMe#notifButton,
+#btnEditAboutMe,
+.btnComment,
+.btnCommentTL,
+.btnMenu,
+.btnNotif,
+.btnViewProfile,
+.btnModal{
     background-color: #0079CF;
 }
 
@@ -179,7 +196,6 @@ span.badge{
     background-color: #0079CF;
     margin-top: 35px;
 }
-
 
 #btnAddFriend{
     background-color: #0079CF;
@@ -235,9 +251,11 @@ span.badge{
     pointer-events: none;
 }
 
-txtEmail{
+#txtEmailEdit{
+    text-decoration: none;
     pointer-events: none;
 }
+
 
 
 /******** Basic Information and About Me************/
@@ -391,14 +409,14 @@ txtEmail{
     resize: none;
     width: 85%;
     margin-bottom: 20px;
-    margin-top: 20px;
+    margin-top: 10px;
 }
 
 .txtAreaCommentTL{
     resize: none;
     width: 83%;
     margin-bottom: 20px;
-    margin-top: 20px;
+    margin-top: 10px;
 }
 
 .btnComment, .btnCommentTL{
@@ -407,11 +425,12 @@ txtEmail{
     font-size: 18px;
     text-align: center;
     margin-left: 3px;
-    margin-top: 20px;
+    margin-top: 10px;
 }
 
 .txtCommentor{
     font-size: 16px;
+    margin-top: 10px;
 }
 
 #btnStart{
@@ -438,6 +457,16 @@ div.col-md-4{
 .btnViewProfile{
     width: 200px;
     margin-left: 20px;
+    margin-top: 15px;
+}
+
+#btnAcceptRequest, #btnIgnoreRequest{
+    margin-left: 10px;
+    margin-top: 15px;
+}
+
+#btnAcceptRequestP, #btnIgnoreRequestP{
+    margin-left: 10px;
 }
 
 .headerSearch{
@@ -489,4 +518,9 @@ div.col-md-4{
     color: #0079CF;
 }
 
-
+/***********Edit About Me***********/
+#txtareaEditAboutMe{
+    width: 100%;
+    height: 200px;
+    resize: none;
+}

@@ -9,43 +9,58 @@
     ViewBag.Title = "Email Settings";
 }
 
-<h3>Email Settings</h3>
 @using (Html.BeginForm("EmailSettings", "PasteBookAccount", FormMethod.Post))
 {
     @Html.HiddenFor(model => model.ID)
 
-    <div class="form-horizontal">
-        <div class="form-group">
-            @Html.Label("Current Email Address", htmlAttributes: new { @class = "control-label col-md-4" })
-            <div class="col-md-8">
-                @Html.DisplayFor(model => model.EMAIL_ADDRESS, new { htmlAttributes = new { @class = "form-control" } })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.Label("Edit Email Address", htmlAttributes: new { @class = "control-label col-md-4" })
-            <div class="col-md-8">
-                @Html.TextBox("newEmail", "", new { @class = "form-control", type = "email" })
-                @Html.ValidationMessage("newEmail", "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.Label("Enter Password", htmlAttributes: new { @class = "control-label col-md-4" })
-            <div class="col-md-8">
-                @Html.EditorFor(model => model.PASSWORD, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.PASSWORD, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-4 col-md-10">
-                <input type="submit" value="Save Changes" class="btn btn-default" />
+    <div id="loginPanel" class="panel panel-primary col-md-offset-3">
+        <div class="panel-heading">Email Settings</div>
+        <div id="bodyLogin" class="panel-body">
+            <div>
+                <div class="row formField">
+                    <div class="form-group">
+                        @Html.Label("Old Email Address", htmlAttributes: new { @class = "control-label col-md-4" })
+                        <div class="col-md-8">
+                            <p id="txtEmailEdit">@Model.EMAIL_ADDRESS</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row formField">
+                    <div class="form-group">
+                        @Html.Label("New Email Address", htmlAttributes: new { @class = "control-label col-md-4" })
+                        <div class="col-md-8">
+                            @Html.TextBox("newEmail","", new { @class = "form-control txtEmailAdd", type = "email" })
+                            @Html.ValidationMessage("newEmail", "", new { @class = "text-danger errorEmailAdd" })
+                        </div>
+                    </div>
+                </div>
+                <div class="row formField">
+                    <div class="form-group">
+                        @Html.Label("Enter Password", htmlAttributes: new { @class = "control-label col-md-4" })
+                        <div class="col-md-8">
+                            @Html.EditorFor(model => model.PASSWORD, new { htmlAttributes = new { @class = "form-control txtPassword" } })
+                            @Html.ValidationMessageFor(model => model.PASSWORD, "", new { @class = "text-danger errorPassword" })
+                        </div>
+                    </div>
+                </div>
+                <div class="row formField">
+                    <div class="form-group">
+                        <div class="col-md-offset-5 col-md-10">
+                            <input id="btnLogin" type="submit" value="Save Changes" class="btn btn-primary btn-lg" />
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 }
 
-@section Scripts{
-    @Scripts.Render("~/bundles/jqueryval")
-}
+        @section Scripts{
+            @Scripts.Render("~/bundles/jqueryval")
+
+            <script>
+                var checkUsername = '@Url.Action("CheckUsername", "PasteBookAccount")';
+                var checkEmail = '@Url.Action("CheckEmail", "PasteBookAccount")';
+            </script>
+            <script src="~/Scripts/pastebookValidator.js"></script>
+        }

@@ -22,7 +22,7 @@ namespace PasteBookDataAccessLogic
                                         .Include("USER1")
                                         .Include("COMMENTs.USER")
                                         .Include("LIKEs.USER")
-                                        .Where(x=>userIDs.Contains(x.POSTER_ID))
+                                        .Where(x=>(userIDs.Contains(x.POSTER_ID)))
                                         .OrderByDescending(x => x.CREATED_DATE)
                                         .ToList();
                 }

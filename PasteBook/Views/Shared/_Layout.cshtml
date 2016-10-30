@@ -16,11 +16,15 @@
                     if (Session["User"] == null)
                     {
                         <a href='@Url.Action("Index", "PasteBookAccount")'><img id="imgLogo" src='@Url.Content("~/Content/Images/pastebookLogo.png")' /></a>
+                        @Html.Hidden("UserID", 0, new { id = "txtID"});
+                        @Html.Hidden("UserName", "", new { id = "txtUsername" });
                     }
 
                     else
                     {
                         <a href='@Url.Action("Index", "PasteBookApp")'><img id="imgLogo" src='@Url.Content("~/Content/Images/pastebookLogo.png")' /></a>
+                        @Html.Hidden("UserID", (int)Session["Userid"], new { id = "txtID" });
+                        @Html.Hidden("UserName", (string)Session["User"], new { id = "txtUsername" });
                     }
 
                 }
@@ -49,8 +53,7 @@
                                 </a>
                                     <ul id="divNotifArea" class="dropdown-menu">
                                         @{Html.RenderAction("NotificationPartialView", "PasteBookApp");}
-                                        <li class="divider"></li>
-                                        <li><a href="@Url.Action("Notifications", "PasteBookApp")">See all notifications</a></li>
+                                        
                                     </ul>
                                 </div>
                             <li>
@@ -63,7 +66,6 @@
                     else
                     {
                         <ul class="nav navbar-nav navbar-right">
-                            <li><button id="btnStart" class="btn btn-primary" onclick="location.href='@Url.Action("Index", "PasteBookAccount")'"><span class="glyphicon glyphicon-home"></span> Home</button></li>
                             <li><button id="btnLoginNav" class="btn btn-primary" onclick="location.href='@Url.Action("Login", "PasteBookAccount")'"><span class="glyphicon glyphicon-log-in"></span>  Login</button></li>
                             <li><button id="btnLogout" class="btn btn-primary" onclick="location.href='@Url.Action("Register", "PasteBookAccount")'"><span class="glyphicon glyphicon-list-alt"></span>  Register</button></li>
                         </ul>
@@ -86,7 +88,8 @@
         var notifCountUrl = '@Url.Action("CountNotifications", "PasteBookApp")';
         var renderNotifUrl = '@Url.Action("NotificationPartialView", "PasteBookApp")';
         var notifSeenUrl = '@Url.Action("ClearNotification", "PasteBookApp")';
-        var currentUser = @Session["Userid"];
+        var currentUser = $('#txtID').val();
+        var currentUsername = $('#txtUsername').val();
         var errorPageUrl = '@Url.Action("GlobalError", "Error")';
     </script>
     <script src="~/Scripts/pastebookNotification.js"></script>

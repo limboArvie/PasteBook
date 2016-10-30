@@ -26,8 +26,8 @@
 
         else if (Model.ListOfFriend.Any(x => x.USER_ID == (int)Session["CurrentProfile"] && x.REQUEST == "N") && (string)Session["User"] != Model.User.USER_NAME)
         {
-            <button class="btnAcceptRequest btn btn-success col-md-3" value=@Model.User.ID>Accept Request</button>
-                <button class="btnIgnoreRequest btn btn-danger col-md-3" value=@Model.User.ID>Ignore Request</button>
+            <button id="btnAcceptRequestP" class="btnAcceptRequest btn btn-success col-md-3" value=@Model.User.ID>Accept Request</button>
+                <button id="btnIgnoreRequestP" class="btnIgnoreRequest btn btn-danger col-md-3" value=@Model.User.ID>Ignore Request</button>
         }
 
         else if (Model.ListOfFriend.Any(x => x.FRIEND_ID != (int)Session["CurrentProfile"]) && (string)Session["User"] != Model.User.USER_NAME || (Model.ListOfFriend.Count() == 0 && (string)Session["User"] != Model.User.USER_NAME))

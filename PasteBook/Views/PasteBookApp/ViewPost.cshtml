@@ -53,7 +53,6 @@
                     <!-- Modal content-->
                     <div class="modal-content">
                         <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal">&times;</button>
                             <h4 class="modal-title">People who liked this post</h4>
                         </div>
 
@@ -80,17 +79,19 @@
 
             <button class="btn btn-success glyphicon glyphicon-comment" title="@Model.COMMENTs.Count() comment(s) for this post">@Model.COMMENTs.Count()</button>
             <br />
-
-            @Html.TextArea("CommentFeed", new { @class = "txtAreaComment", id = @Model.ID, placeholder = "Paste your comment..." })
-            <button class="btnComment btn btn-primary" value="@Model.ID">Comment</button>
-
+            <br />
+            
             @{
                 foreach (var comment in Model.COMMENTs)
                 {
+                    <div class="divider"></div>
                     <a class="txtCommentor" href="@Url.Action("UserProfile", "PasteBookApp", new { userID = @comment.USER.USER_NAME })">@comment.USER.FIRST_NAME @comment.USER.LAST_NAME</a>
-                        <p class="txtComment">@comment.CONTENT</p>
+                    <p class="txtComment">@comment.CONTENT</p>
                 }
             }
+
+            @Html.TextArea("CommentFeed", new { @class = "txtAreaComment", id = @Model.ID, placeholder = "Paste your comment..." })
+            <button class="btnComment btn btn-primary" value="@Model.ID">Comment</button>
 
         </div>
     }

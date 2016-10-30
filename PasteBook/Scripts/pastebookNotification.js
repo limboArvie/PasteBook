@@ -1,6 +1,6 @@
 ﻿$(document).ready(function () {
     
-    if (currentUser != null) {
+    if (currentUser != 0) {
         GetNotifCount();
         setInterval(GetNotifCount, 3000);
     }
@@ -45,7 +45,7 @@
     });
 
     function SeenNotifSuccess(data) {
-
+        GetNotifCount();
     }
 
 });

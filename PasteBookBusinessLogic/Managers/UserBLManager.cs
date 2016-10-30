@@ -15,6 +15,29 @@ namespace PasteBookBusinessLogic
             return userManager.RetrieveCountryList();
         }
 
+        public List<Object> GenderList()
+        {
+            return new List<Object>
+            {
+                new { value = "U" , gender = "Select Gender"},
+                new { value = "M" , gender = "Male"},
+                new { value = "F" , gender = "Female"}
+            };
+        }
+
+        public string GetGender(string genderValue)
+        {
+            switch (genderValue)
+            {
+                case "M":
+                    return "Male";
+                case "F":
+                    return "Female";
+                default:
+                    return "Select Gender";
+            }
+        }
+
         public bool CheckUsername(string username)
         {
             return userManager.CheckUsernameExists(username);

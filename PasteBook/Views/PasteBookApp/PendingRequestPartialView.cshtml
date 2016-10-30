@@ -31,9 +31,9 @@
                             <div id="txtuserName" class="col-md-12">
                                 (@Html.DisplayFor(model => item.USER_NAME))
                             </div>
-                            <button class="btnViewProfile btn btn-primary" onclick="location.href='@Url.Action("UserProfile", "PasteBookApp", new { userID = @item.USER_NAME})'"><span class="glyphicon glyphicon-eye-open"></span> View Profile</button>
-                            <button class="btnAcceptRequest btn btn-success col-md-3" value=@item.ID>Accept Request</button>
-                            <button class="btnIgnoreRequest btn btn-danger col-md-3" value=@item.ID>Ignore Request</button>
+                            <button class="btnViewProfile btn btn-primary col-md-3" onclick="location.href='@Url.Action("UserProfile", "PasteBookApp", new { userID = @item.USER_NAME})'"><span class="glyphicon glyphicon-eye-open"></span> View Profile</button>
+                            <button id="btnAcceptRequest" class="btnAcceptRequest btn btn-success col-md-3" value=@item.ID><span class="glyphicon glyphicon-ok"></span>Accept Request</button>
+                            <button id="btnIgnoreRequest" class="btnIgnoreRequest btn btn-danger col-md-3" value=@item.ID><span class="glyphicon glyphicon-remove"></span>Ignore Request</button>
                         </div>
                     </div>
                 </div>

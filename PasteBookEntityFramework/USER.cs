@@ -32,7 +32,7 @@ namespace PasteBookEntityFramework
         [Required]
         [DisplayName("Username")]
         [MaxLength(50, ErrorMessage = "Username is too long. Maximum length is 50.")]
-        //[RegularExpression("/^[A-Za-z0-9][A-Za-z0-9_. ]+$/", ErrorMessage = "Invalid Username format. Only Alphanumeric characters(A-Za-z0-9), period(.) and underscore(_) are allowed.")]
+        [RegularExpression("^([A-Za-z0-9._ ])([A-Za-z0-9._])*(([A-Za-z0-9_. ])*)?$", ErrorMessage = "Invalid Username format. Only alphanumeric characters(A-Za-z0-9), period(.) and underscore(_) are allowed.")]
         public string USER_NAME { get; set; }
 
         [Required]
@@ -46,13 +46,13 @@ namespace PasteBookEntityFramework
         [Required]
         [DisplayName("First Name")]
         [MaxLength(50, ErrorMessage = "First name is too long. Maximum length is 50.")]
-        //[RegularExpression("/^[A-Za-z0-9][A-Za-z0-9.' ]+/", ErrorMessage = "First name cannot contain special characters. Only alphanumeric characters(A-Za-z0-9), dash(-), period(.) and apostrophe(') are allowed.")]
+        [RegularExpression("^([A-Za-z0-9.' -])([A-Za-z0-9.'-])*(([A-Za-z0-9.' -])*)?$", ErrorMessage = "Invalid First Name. Only alphanumeric characters(A-Za-z0-9), dash(-), period(.) and apostrophe(') are allowed.")]
         public string FIRST_NAME { get; set; }
 
         [Required]
         [DisplayName("Last Name")]
         [MaxLength(50, ErrorMessage = "Last name is too long. Maximum length is 50.")]
-        //[RegularExpression("/^[A-Za-z0-9][A-Za-z0-9.' ]+/", ErrorMessage = "Last name cannot contain special characters and must start with alphanumeric characters. Only alphanumeric characters(A-Za-z0-9), dash(-) and apostrophe(') are allowed.")]
+        [RegularExpression("^([A-Za-z0-9.' -])([A-Za-z0-9.'-])*(([A-Za-z0-9.' -])*)?$", ErrorMessage = "Invalid Last Name. Only alphanumeric characters(A-Za-z0-9), dash(-), period(.) and apostrophe(') are allowed.")]
         public string LAST_NAME { get; set; }
 
         [Required]
