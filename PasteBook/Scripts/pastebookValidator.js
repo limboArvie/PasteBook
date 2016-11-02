@@ -15,14 +15,14 @@
 
     $('.txtFirstName').blur(function () {
         $('.errorFirstName').text(CheckNull($(this).val(), "First Name"));
-        ChechNameFormat($(this).val(), "First Name", "errorFirstName");
         $('.errorFirstName').text(CheckMax($(this).val(), 50, "First Name"));
+        ChechNameFormat($(this).val(), "First Name", "errorFirstName");
     });
 
     $('.txtLastName').blur(function () {
         $('.errorLastName').text(CheckNull($(this).val(), "Last Name"));
-        ChechNameFormat($(this).val(), "Last Name", "errorLastName");
         $('.errorLastName').text(CheckMax($(this).val(), 50, "Last Name"));
+        ChechNameFormat($(this).val(), "Last Name", "errorLastName");
     });
 
     $('.txtPassword').blur(function () {
@@ -50,6 +50,52 @@
         EmailExist($('.txtEmailAdd').val());
         $('.errorRePassword').text(CheckNull($('.txtRePassword').val(), "Confirm Password"));
     });
+
+    $('#btnEditPicture').click(function () {
+        $('#errorImageUpload').text("");
+        $('#btnFile').val("");
+        $('#btnUploadImg').attr('disabled', true);
+    });
+
+    $('#btnFile').change(function () {
+        var imgSize = $('#btnFile')[0].files[0].size;
+        var imgExt = $('#btnFile').val().split('.').pop().toLowerCase();
+
+        if ($.inArray(imgExt, ['gif', 'png', 'jpg', 'jpeg']) == -1) {
+            $('#errorImageUpload').text("Invalid format. Please upload an image file");
+            $('#btnUploadImg').attr('disabled', true);
+        }
+
+        else {
+            $('#errorImageUpload').text("");
+
+            if (imgSize > 2097152) {
+                $('#errorImageUpload').text("Image file is too big. Maximum file size is 2MB.");
+                $('#btnUploadImg').attr('disabled', true);
+            }
+
+            else {
+                $('#errorImageUpload').text("");
+                $('#btnUploadImg').attr('disabled', false);
+            }
+        } 
+    });
+
+    $('#btnSubmitAboutMe').click(function () {
+
+        var aboutMe = $('#txtareaEditAboutMe').val().trim();
+
+        if (aboutMe.length > 2000)
+        {
+            $('#errorAboutMe').text("Maximum number of characters reached. Character limit is 2000.");
+        }
+
+        else
+        {
+            $('#formAboutMe').submit();
+        }
+    });
+    
 
     function CheckNull(value, test) {
         if (value == "") {
@@ -103,7 +149,8 @@
                 },
 
                 error: function () {
-                    window.location.href = errorPageUrl;
+                    $('.txtErrorModal').text("Unable to process the request. Something went wrong.");
+                    $('#errorModal').modal('show');
                 }
             })
         }
@@ -129,7 +176,8 @@
             },
 
             error: function () {
-                window.location.href = errorPageUrl;
+                $('.txtErrorModal').text("Unable to process the request. Something went wrong.");
+                $('#errorModal').modal('show');
             }
         })
     }

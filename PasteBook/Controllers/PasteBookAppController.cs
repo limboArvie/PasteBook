@@ -1,4 +1,5 @@
-﻿using PasteBook.Models;
+﻿using PasteBook.Managers;
+using PasteBook.Models;
 using PasteBookBusinessLogic;
 using PasteBookEntityFramework;
 using System.Collections.Generic;
@@ -16,17 +17,14 @@ namespace PasteBook.Controllers
         UserBLManager userManager = new UserBLManager();
 
         [Route("")]
+        [CustomAuthorize]
         public ActionResult Index()
         {
-            if(Session["Userid"] == null)
-            {
-                return RedirectToAction("Login", "PasteBookAccount");
-            }
-
             Session["CurrentProfile"] = 0;
             return View(pasteBook);
         }
 
+        [CustomAuthorize]
         public ActionResult FeedPostPartialView()
         {
             List<POST> listOfPosts = new List<POST>();
@@ -38,13 +36,9 @@ namespace PasteBook.Controllers
         }
 
         [Route("{userID:minlength(1)}")]
+        [CustomAuthorize]
         public ActionResult UserProfile(string userID)
         {
-            if (Session["Userid"] == null)
-            {
-                return RedirectToAction("Login", "PasteBookAccount");
-            }
-
             USER currentUser = new USER();
             currentUser = appManager.GetUserInfo(userID);
             Session["CurrentProfile"] = currentUser.ID;
@@ -52,12 +46,14 @@ namespace PasteBook.Controllers
             return View(pasteBook);
         }
 
+        [CustomAuthorize]
         public ActionResult TimeLinePostPartialView(PasteBookViewModel model)
         {
             model.ListOfPost = appManager.RetrieveTimeLinePosts((int)Session["CurrentProfile"]);
             return PartialView("TimeLinePostPartialView", model);
         }
 
+        [CustomAuthorize]
         public ActionResult ProfileBannerPartialView(PasteBookViewModel model)
         {
             USER currentUser = new USER();
@@ -67,6 +63,7 @@ namespace PasteBook.Controllers
             return PartialView("ProfileBannerPartialView", model);
         }
 
+        [CustomAuthorize]
         public ActionResult PendingRequestPartialView(FriendsViewModel model)
         {
             List<FRIEND> requestList = new List<FRIEND>();
@@ -77,6 +74,7 @@ namespace PasteBook.Controllers
             return PartialView("PendingRequestPartialView", model);
         }
 
+        [CustomAuthorize]
         public ActionResult NotificationPartialView()
         {
             pasteBook.ListOfNotif = appManager.RetrieveNotifications((int)Session["Userid"]);
@@ -85,13 +83,9 @@ namespace PasteBook.Controllers
 
         [ActionName("friends")]
         [Route("friends")]
+        [CustomAuthorize]
         public ActionResult Friends()
         {
-            if (Session["Userid"] == null)
-            {
-                return RedirectToAction("Login", "PasteBookAccount");
-            }
-
             List<FRIEND> friendList = new List<FRIEND>();
             List<USER> friendsInfo = new List<USER>();
             FriendsViewModel friendsModel = new FriendsViewModel();
@@ -102,6 +96,7 @@ namespace PasteBook.Controllers
             return View(friendsModel);
         }
 
+        [CustomAuthorize]
         public ActionResult EditProfilePicture(HttpPostedFileBase file)
         {
             byte[] profilePicture;
@@ -124,14 +119,16 @@ namespace PasteBook.Controllers
             return RedirectToAction("UserProfile", new { userID = (string)Session["User"] });
         }
 
+        [CustomAuthorize]
         public ActionResult EditAboutMe (PasteBookViewModel model)
         {
             USER currentUser = appManager.GetUserInfo((int)Session["Userid"]);
-            currentUser.ABOUT_ME = model.User.ABOUT_ME;
+            currentUser.ABOUT_ME = model.User.ABOUT_ME.Trim();
             userManager.EditUser(currentUser);
             return RedirectToAction("UserProfile", new { userID = (string)Session["User"] });
         }
 
+        [CustomAuthorize]
         public JsonResult AddFriend(FRIEND friend)
         {
             var result = appManager.AddFriend(friend);
@@ -157,13 +154,9 @@ namespace PasteBook.Controllers
         }
 
         [Route("posts/{postID}")]
+        [CustomAuthorize]
         public ActionResult ViewPost(int postID)
         {
-            if (Session["Userid"] == null)
-            {
-                return RedirectToAction("Login", "PasteBookAccount");
-            }
-
             POST post = appManager.RetrieveSpecificPost(postID);
             return View(post);
         }
@@ -182,13 +175,9 @@ namespace PasteBook.Controllers
         }
 
         [Route("notifications")]
+        [CustomAuthorize]
         public ActionResult Notifications()
         {
-            if (Session["Userid"] == null)
-            {
-                return RedirectToAction("Login", "PasteBookAccount");
-            }
-
             List<NOTIFICATION> notifList = appManager.RetrieveNotifications((int)Session["Userid"]);
             return View(notifList);
         }
@@ -212,13 +201,9 @@ namespace PasteBook.Controllers
         }
 
         [Route("search")]
+        [CustomAuthorize]
         public ActionResult Search(string searchString)
         {
-            if (Session["Userid"] == null)
-            {
-                return RedirectToAction("Login", "PasteBookAccount");
-            }
-
             UserViewModel searchFriends = new UserViewModel();
             searchFriends.SearchKey = searchString;
             searchFriends.UserList = userManager.SearchUser(searchString);

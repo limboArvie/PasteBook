@@ -14,7 +14,8 @@
             },
 
             error: function () {
-                window.location.href = errorPageUrl;
+                $('.txtErrorModal').text("Unable to process the request. Something went wrong.");
+                $('#errorModal').modal('show');
             }
         })
     }
@@ -39,7 +40,8 @@
             },
 
             error: function () {
-                window.location.href = errorPageUrl;
+                $('.txtErrorModal').text("Unable to process the request. Something went wrong.");
+                $('#errorModal').modal('show');
             }
         })
     });

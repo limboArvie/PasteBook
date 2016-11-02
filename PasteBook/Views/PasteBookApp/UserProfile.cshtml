@@ -41,17 +41,18 @@
                     <!-- Modal content-->
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h4 class="modal-title">Edit Profile Picture</h4>
+                            <p class="modal-title">Edit Profile Picture</p>
                         </div>
                         @using (Html.BeginForm("EditProfilePicture", "PasteBookApp", FormMethod.Post, new { enctype = "multipart/form-data" }))
                         {
                             <div class="modal-body">
                                 <label for="file">Upload new Profile Picture:</label>
-                                <input type="file" name="file" id="file" style="width: 100%;" />
+                                <input type="file" accept="image/*" name="file" id="btnFile" style="width: 100%;" />
+                                @Html.ValidationMessage("ImageUpload", "", new { @class = "text-danger", id = "errorImageUpload" })
                             </div>
                         
                             <div class="modal-footer">
-                                <input type="submit" value="Save Profile Picture" class="submit btn btn-primary btnModal" />
+                                <input id ="btnUploadImg" type="submit" value="Save Profile Picture" class="submit btn btn-primary btnModal" />
                                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                             </div>
                         }
@@ -160,19 +161,17 @@
                         <!-- Modal content-->
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h4 class="modal-title">Edit About Me</h4>
+                                <p class="modal-title">Edit About Me</p>
                             </div>
-
-                            <div class="modal-body">
-                                @using (Html.BeginForm("EditAboutMe", "PasteBookApp", FormMethod.Post))
-                                {
-                                    @Html.TextAreaFor(model => model.User.ABOUT_ME, new { @class = "form-control", id = "txtareaEditAboutMe" })
-                                    
-                                }
-                            </div>
-
+                            @using (Html.BeginForm("EditAboutMe", "PasteBookApp", FormMethod.Post, new { id = "formAboutMe" }))
+                            {
+                                <div class="modal-body">
+                                        @Html.TextAreaFor(model => model.User.ABOUT_ME, new { @class = "form-control", id = "txtareaEditAboutMe" })
+                                        @Html.ValidationMessage("ErrorAboutMe", "", new { @class = "text-danger", id = "errorAboutMe" })
+                                </div>
+                            }
                             <div class="modal-footer">
-                                <input type="submit" value="Save Changes" class="submit btn btn-primary btnModal" />
+                                <button id="btnSubmitAboutMe" class="btn btn-primary btnModal">Save Changes</button>
                                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                             </div>
                         </div>
@@ -242,8 +241,11 @@
         var commentTLUrl = '@Url.Action("Comment", "PasteBookApp")';
         var currentUserID = @Session["Userid"];
         var currentProfileID = @Session["CurrentProfile"];
+        var checkUsername = '@Url.Action("CheckUsername", "PasteBookAccount")';
+        var checkEmail = '@Url.Action("CheckEmail", "PasteBookAccount")';
     </script>
 
     <script src="~/Scripts/pastebookPost.js"></script>
     <script src="~/Scripts/pastebookFriend.js"></script>
+    <script src="~/Scripts/pastebookValidator.js"></script>
 }

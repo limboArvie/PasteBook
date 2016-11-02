@@ -162,6 +162,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Managers\CustomAuthorize.cs" />
     <Compile Include="Models\FriendsViewModel.cs" />
     <Compile Include="Models\PasteBookViewModel.cs" />
     <Compile Include="Models\UserViewModel.cs" />

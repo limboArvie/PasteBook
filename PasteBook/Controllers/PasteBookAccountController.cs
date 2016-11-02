@@ -1,7 +1,10 @@
-﻿using PasteBook.Models;
+﻿using PasteBook.Managers;
+using PasteBook.Models;
 using PasteBookBusinessLogic;
 using PasteBookEntityFramework;
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Web.Mvc;
 
 namespace PasteBook.Controllers
@@ -18,13 +21,17 @@ namespace PasteBook.Controllers
 
         public ActionResult Login()
         {
+            if(Session["User"] != null)
+            {
+                return RedirectToAction("Index", "PasteBookApp");
+            }
+
             return View();
         }
 
         [HttpPost]
         public ActionResult Login(USER user)
         {
-            
             USER currentUser = new USER();
 
             if (user.EMAIL_ADDRESS!=null && user.PASSWORD!=null)
@@ -66,14 +73,24 @@ namespace PasteBook.Controllers
 
         public ActionResult Register()
         {
+            IEnumerable<SelectListItem> genderOptions;
+
+            if (Session["User"] != null)
+            {
+                return RedirectToAction("Index", "PasteBookApp");
+            }
+
             ViewBag.Country = new SelectList(userManager.RetrieveCountryList(), "ID", "COUNTRY");
-            ViewBag.Gender = new SelectList(userManager.GenderList(), "value", "gender");
+
+            genderOptions = new List<SelectListItem>(GenderList());
+            ViewBag.Gender = (genderOptions);
             return View();
         }
 
         [HttpPost]
         public ActionResult Register(USER user, string ConfirmPassword)
         {
+            IEnumerable<SelectListItem> genderOptions;
             user.USER_NAME = user.USER_NAME.Trim();
             user.FIRST_NAME = user.FIRST_NAME.Trim();
             user.LAST_NAME = user.LAST_NAME.Trim();
@@ -111,14 +128,19 @@ namespace PasteBook.Controllers
             }
 
             ViewBag.Country = new SelectList(userManager.RetrieveCountryList(), "ID", "COUNTRY");
-            ViewBag.Gender = new SelectList(userManager.GenderList(), "value", "gender");
+            genderOptions = new List<SelectListItem>(GenderList());
+            ViewBag.Gender = (genderOptions);
             return View("Register", user);
         }
 
+        [CustomAuthorize]
         public ActionResult ProfileSettings()
         {
+            IEnumerable<SelectListItem> genderOptions;
+
             USER currentUser = pasteBookManager.GetUserInfo((int)Session["Userid"]);
-            if(currentUser.COUNTRY_ID != null)
+
+            if (currentUser.COUNTRY_ID != null)
             {
                 ViewBag.Country = new SelectList(userManager.RetrieveCountryList(), "ID", "COUNTRY", currentUser.REF_COUNTRY.COUNTRY);
             }
@@ -128,13 +150,18 @@ namespace PasteBook.Controllers
                 ViewBag.Country = new SelectList(userManager.RetrieveCountryList(), "ID", "COUNTRY");
             }
 
-            ViewBag.Gender = new SelectList(userManager.GenderList(), "value", "gender", userManager.GetGender(currentUser.GENDER));
+            genderOptions =  new List<SelectListItem>(GenderList());
+            ViewBag.Gender = (genderOptions);
+
             return View("ProfileSettings", currentUser);
         }
 
         [HttpPost]
+        [CustomAuthorize]
         public ActionResult ProfileSettings(USER user)
         {
+            IEnumerable<SelectListItem> genderOptions;
+
             user.USER_NAME = user.USER_NAME.Trim();
             user.FIRST_NAME = user.FIRST_NAME.Trim();
             user.LAST_NAME = user.LAST_NAME.Trim();
@@ -151,7 +178,8 @@ namespace PasteBook.Controllers
                 ViewBag.Country = new SelectList(userManager.RetrieveCountryList(), "ID", "COUNTRY");
             }
 
-            ViewBag.Gender = new SelectList(userManager.GenderList(), "value", "gender", userManager.GetGender(currentUser.GENDER));
+            genderOptions = new List<SelectListItem>(GenderList());
+            ViewBag.Gender = (genderOptions);
 
             if (userManager.CheckUsername(user.USER_NAME) && user.USER_NAME!=(string)Session["User"])
             {
@@ -173,6 +201,7 @@ namespace PasteBook.Controllers
             return View("ProfileSettings", user);
         }
 
+        [CustomAuthorize]
         public ActionResult EmailSettings()
         {
             USER currentUser = pasteBookManager.GetUserInfo((int)Session["Userid"]);
@@ -181,6 +210,7 @@ namespace PasteBook.Controllers
         }
 
         [HttpPost]
+        [CustomAuthorize]
         public ActionResult EmailSettings(USER user, string newEmail)
         {
             bool result = false;
@@ -210,6 +240,7 @@ namespace PasteBook.Controllers
             return View("EmailSettings", user);
         }
 
+        [CustomAuthorize]
         public ActionResult PasswordSettings()
         {
             USER currentUser = pasteBookManager.GetUserInfo((int)Session["Userid"]);
@@ -218,6 +249,7 @@ namespace PasteBook.Controllers
         }
 
         [HttpPost]
+        [CustomAuthorize]
         public ActionResult PasswordSettings(USER user, string newPassword, string reTypePassword)
         {
             USER currentUser = pasteBookManager.GetUserInfo(user.ID);
@@ -242,10 +274,22 @@ namespace PasteBook.Controllers
             return View("PasswordSettings", user);
         }
 
+        [CustomAuthorize]
         public ActionResult Logout()
         {
             Session.Clear();
             return View("Login");
         }
+
+        private List<SelectListItem> GenderList()
+        {
+            return new List<SelectListItem>()
+            {
+                new SelectListItem { Value = "U" , Text = "Select Gender"},
+                new SelectListItem { Value = "M" , Text = "Male"},
+                new SelectListItem { Value = "F" , Text = "Female"}
+            };
+        }
+
     }
 }

@@ -11,17 +11,17 @@
         {
             if (@item.NOTIF_TYPE == "L")
             {
-                <li><a href="@Url.Action("ViewPost", "PasteBookApp", new { postID = @item.POST_ID})"><span class="glyphicon glyphicon-star notifStarSM"></span>@item.USER1.FIRST_NAME @item.USER1.LAST_NAME liked one of your posts.</a></li>
+                <li><a class="notifLinks" href="@Url.Action("ViewPost", "PasteBookApp", new { postID = @item.POST_ID})"><span class="glyphicon glyphicon-star notifStarSM"></span>@item.USER1.FIRST_NAME @item.USER1.LAST_NAME liked one of your posts.</a></li>
             }
 
             else if (@item.NOTIF_TYPE == "C")
             {
-                <li><a href="@Url.Action("ViewPost", "PasteBookApp", new { postID = @item.POST_ID})"><span class="glyphicon glyphicon-comment notifCommentSM"></span>@item.USER1.FIRST_NAME @item.USER1.LAST_NAME commented on one of your posts.</a></li>
+                <li><a class="notifLinks" href="@Url.Action("ViewPost", "PasteBookApp", new { postID = @item.POST_ID})"><span class="glyphicon glyphicon-comment notifCommentSM"></span>@item.USER1.FIRST_NAME @item.USER1.LAST_NAME commented on one of your posts.</a></li>
             }
 
             else
             {
-                <li><a href="@Url.Action("Friends", "PasteBookApp")"><span class="glyphicon glyphicon-user notifFriendSM"></span>@item.USER1.FIRST_NAME @item.USER1.LAST_NAME sent you a friend request.</a></li>
+                <li><a class="notifLinks" href="@Url.Action("Friends", "PasteBookApp")"><span class="glyphicon glyphicon-user notifFriendSM"></span>@item.USER1.FIRST_NAME @item.USER1.LAST_NAME sent you a friend request.</a></li>
             }
 
         }

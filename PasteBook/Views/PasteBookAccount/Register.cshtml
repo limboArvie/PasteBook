@@ -76,7 +76,19 @@
                     <div class="form-group">
                         @Html.LabelFor(model => model.GENDER, htmlAttributes: new { @class = "control-label col-md-4" })
                         <div class="col-md-8">
-                            @Html.DropDownListFor(model => model.GENDER, (SelectList)@ViewBag.Gender, new { @class = "form-control" })
+                            
+                            @{SelectList genderOptions = new SelectList(
+                            new List<Object>
+                            {
+                                        new { value = "U" , gender = "Select Gender"  },
+                                        new { value = "M" , gender = "Male"},
+                                        new { value = "F" , gender = "Female"}
+                                        
+                            },
+                            "value", "gender");
+                            }
+
+                            @Html.DropDownListFor(model => model.GENDER, genderOptions, new { @class = "form-control" })
                             @Html.ValidationMessageFor(model => model.GENDER, "", new { @class = "text-danger" })
                         </div>
                     </div>

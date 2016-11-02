@@ -16,12 +16,12 @@
     @{
         if ((string)Session["User"] != Model.User.USER_NAME && Model.ListOfFriend.Any(x => (x.FRIEND_ID == (int)Session["CurrentProfile"] || x.USER_ID == (int)Session["CurrentProfile"]) && x.REQUEST == "Y"))
         {
-            <button id="btnFriends" class="btn btn-success col-md-3" disabled>Friends</button>
+            <button id="btnFriends" class="btn btn-primary col-md-3 btnfriendStatus" disabled>Friends</button>
         }
 
         else if (Model.ListOfFriend.Any(x => x.FRIEND_ID == (int)Session["CurrentProfile"] && x.REQUEST == "N") && (string)Session["User"] != Model.User.USER_NAME)
         {
-            <button id="btnFRequest" class="btn btn-warning col-md-3" disabled>Friend Request Sent</button>
+            <button id="btnFRequest" class="btn btn-warning col-md-3 btnfriendStatus" disabled>Friend Request Sent</button>
         }
 
         else if (Model.ListOfFriend.Any(x => x.USER_ID == (int)Session["CurrentProfile"] && x.REQUEST == "N") && (string)Session["User"] != Model.User.USER_NAME)

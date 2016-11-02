@@ -18,6 +18,14 @@ namespace PasteBook
             BundleConfig.RegisterBundles(BundleTable.Bundles);
         }
 
+        //http://stackoverflow.com/questions/19315742/after-logout-if-browser-back-button-press-then-it-go-back-last-screen
+        protected void Application_BeginRequest()
+        {
+            Response.Cache.SetCacheability(HttpCacheability.NoCache);
+            Response.Cache.SetExpires(DateTime.UtcNow.AddHours(-1));
+            Response.Cache.SetNoStore();
+        }
+
         protected void Application_Error(object sender, EventArgs e)
         {
             var ex = Server.GetLastError() as HttpException;

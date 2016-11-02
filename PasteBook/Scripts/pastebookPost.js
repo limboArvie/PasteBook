@@ -8,15 +8,21 @@
 
     $('#btnPostFeed').on('click', function () {
         var data = {
-            "CONTENT": $('#txtAreaPostFeed').val()+" ",
+            "CONTENT": $('#txtAreaPostFeed').val().trim(),
             "ID": 0,
             "PROFILE_OWNER_ID": currentUserID,
             "POSTER_ID": currentUserID,
             "CREATED_DATE": null
         }
 
-        if (data.Content == '') {
-            
+        if (data.CONTENT == '') {
+            $('.txtErrorModal').text("Post cannot be empty.");
+            $('#errorModal').modal('show');
+        }
+
+        else if (data.CONTENT.length > 1000) {
+            $('.txtErrorModal').text("Reached the maximum post limit which is 1000 characters.");
+            $('#errorModal').modal('show');
         }
 
         else {
@@ -29,7 +35,8 @@
                 },
 
                 error: function () {
-                    window.location.href = errorPageUrl;
+                    $('.txtErrorModal').text("Unable to post. Something went wrong.");
+                    $('#errorModal').modal('show');
                 }
             })
         }
@@ -37,15 +44,21 @@
 
     $('#btnPostTimeLine').on('click', function () {
         var data = {
-            "CONTENT": $('#txtAreaPostTimeLine').val(),
+            "CONTENT": $('#txtAreaPostTimeLine').val().trim(),
             "ID": 0,
             "PROFILE_OWNER_ID": currentUserID,
             "POSTER_ID": currentUserID,
             "CREATED_DATE": null
         }
 
-        if (data.Content == '') {
-            
+        if (data.CONTENT == '') {
+            $('.txtErrorModal').text("Post cannot be empty.");
+            $('#errorModal').modal('show');
+        }
+
+        else if (data.CONTENT.length > 1000) {
+            $('.txtErrorModal').text("Reached the maximum post limit which is 1000 characters.");
+            $('#errorModal').modal('show');
         }
 
         else {
@@ -58,7 +71,8 @@
                 },
 
                 error: function () {
-                    window.location.href = errorPageUrl;
+                    $('.txtErrorModal').text("Unable to post. Something went wrong.");
+                    $('#errorModal').modal('show');
                 }
             })
         }
@@ -94,7 +108,8 @@
             },
                 
             error: function () {
-                window.location.href = errorPageUrl;
+                $('.txtErrorModal').text("Unable to like this post. Something went wrong.");
+                $('#errorModal').modal('show');
             }
         })
     });
@@ -107,28 +122,41 @@
             "ID": null,
             "POST_ID": this.value,
             "POSTER_ID": currentUserID,
-            "CONTENT": $('#' + this.value).val(),
+            "CONTENT": $('#' + this.value).val().trim(),
             "DATE_CREATED": null
         }
 
-        $.ajax({
-            url: commentUrl,
-            data: data,
-            type: 'POST',
-            success: function (data) {
-                if (currentLocation.pathname.match(/^\/pastebook.com\/posts\/(\d+)/)) {
-                    SpecificPostSuccess(data);
-                }
+        if (data.CONTENT == '') {
+            $('.txtErrorModal').text("Comment cannot be empty.");
+            $('#errorModal').modal('show');
+        }
 
-                else {
-                    CommentFSuccess(data);
-                }
-            },
+        else if (data.CONTENT.length > 1000) {
+            $('.txtErrorModal').text("Reached the maximum comment limit which is 1000 characters.");
+            $('#errorModal').modal('show');
+        }
 
-            error: function () {
-                window.location.href = errorPageUrl;
-            }
-        })
+        else {
+            $.ajax({
+                url: commentUrl,
+                data: data,
+                type: 'POST',
+                success: function (data) {
+                    if (currentLocation.pathname.match(/^\/pastebook.com\/posts\/(\d+)/)) {
+                        SpecificPostSuccess(data);
+                    }
+
+                    else {
+                        CommentFSuccess(data);
+                    }
+                },
+
+                error: function () {
+                    $('.txtErrorModal').text("Unable to comment on this post. Something went wrong.");
+                    $('#errorModal').modal('show');
+                }
+            })
+        }
     });
 
     $(document).on('click', '.btnCommentTL', function () {
@@ -137,22 +165,36 @@
             "ID": null,
             "POST_ID": this.value,
             "POSTER_ID": currentUserID,
-            "CONTENT": $('#' + this.value).val(),
+            "CONTENT": $('#' + this.value).val().trim(),
             "DATE_CREATED": null
         }
 
-        $.ajax({
-            url: commentTLUrl,
-            data: data,
-            type: 'POST',
-            success: function (data) {
-                CommentTLSuccess(data);
-            },
+        if (data.CONTENT == '') {
+            $('.txtErrorModal').text("Comment cannot be empty.");
+            $('#errorModal').modal('show');
+        }
 
-            error: function () {
-                window.location.href = errorPageUrl;
-            }
-        })
+        else if (data.CONTENT.length > 1000) {
+            $('.txtErrorModal').text("Reached the maximum comment limit which is 1000 characters.");
+            $('#errorModal').modal('show');
+        }
+
+        else {
+
+            $.ajax({
+                url: commentTLUrl,
+                data: data,
+                type: 'POST',
+                success: function (data) {
+                    CommentTLSuccess(data);
+                },
+
+                error: function () {
+                    $('.txtErrorModal').text("Unable to comment on this post. Something went wrong.");
+                    $('#errorModal').modal('show');
+                }
+            })
+        }
     });
 
     function ReloadFeed() {
