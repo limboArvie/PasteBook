@@ -64,21 +64,5 @@ namespace PasteBookDataAccessLogic
                 return false;
             }
         }
-
-        //public List<T> RetrieveEntityList()
-        //{
-        //    try
-        //    {
-        //        using (var context = new PASTEBOOKEntities())
-        //        {
-        //            return context.Set<T>().ToList();
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        ErrorList.Add(ex);
-        //        return null;
-        //    }
-        //}
     }
 }
