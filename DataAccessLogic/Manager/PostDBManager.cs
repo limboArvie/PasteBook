@@ -10,7 +10,7 @@ namespace PasteBookDataAccessLogic
 {
     public class PostDBManager : DBManager
     {
-        public List<POST> RetrieveFeedPosts(List<int> userIDs)
+        public List<POST> RetrieveFeedPosts(List<int> posterIDs)
         {
             List<POST> postList = new List<POST>();
             try
@@ -22,7 +22,7 @@ namespace PasteBookDataAccessLogic
                                         .Include("USER1")
                                         .Include("COMMENTs.USER")
                                         .Include("LIKEs.USER")
-                                        .Where(x=>(userIDs.Contains(x.POSTER_ID)))
+                                        .Where(x=>(posterIDs.Contains(x.POSTER_ID)))
                                         .OrderByDescending(x => x.CREATED_DATE)
                                         .ToList();
                 }
